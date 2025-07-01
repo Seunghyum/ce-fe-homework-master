@@ -10,7 +10,7 @@ export default function ToolBar() {
       </div>
       <div className="flex items-center gap-2">
         <Link href={PATH.SERVICE_BOARD_CREATE}>
-          <button className="border border-gray-300 rounded-md p-2">
+          <button className="border border-gray-300 rounded-md p-2 cursor-pointer">
             등록
           </button>
         </Link>

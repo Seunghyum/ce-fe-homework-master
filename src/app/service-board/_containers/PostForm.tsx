@@ -1,5 +1,7 @@
 "use client";
 
+import { PATH } from "@/constants/path";
+import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -68,20 +70,34 @@ export default function PostForm({ onSubmit }: PostFormProps) {
             </p>
           )}
         </div>
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            style={{
+              padding: "0.75rem 1.5rem",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            글 등록하기
+          </button>
 
-        <button
-          type="submit"
-          style={{
-            padding: "0.75rem 1.5rem",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          글 등록하기
-        </button>
+          <Link href={PATH.SERVICE_BOARD}>
+            <button
+              style={{
+                padding: "0.75rem 1.5rem",
+                border: "1px solid #000",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              목록
+            </button>
+          </Link>
+        </div>
       </form>
     </div>
   );
