@@ -1,9 +1,11 @@
+import { FormValues } from "@/app/service-board/create/_containers/PostForm";
 import octokit, { getTotalPagesFromLinkHeader } from "@/lib/octokit";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const PREFIX = "repoIssues";
 
 export const repoIssuesKey = {
+  all: [PREFIX],
   list: (page: number) => [PREFIX, page],
 };
 
@@ -21,12 +23,37 @@ export const fetchRepoIssues = async ({
     { per_page, page }
   )) as RepoIssuesResponse;
 
-  console.log(response.headers.link);
-
   return {
     data: response.data,
     total_pages: getTotalPagesFromLinkHeader(response.headers.link),
   };
+};
+
+export const createRepoIssue = async (data: FormValues) => {
+  const response = await octokit.request(
+    `POST /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues`,
+    {
+      owner: process.env.NEXT_PUBLIC_OWNER,
+      repo: process.env.NEXT_PUBLIC_REPO,
+      title: data.title,
+      body: data.content,
+    }
+  );
+
+  return response.data;
+};
+
+interface UseRepoIssuesMutationProps {
+  onSuccess?: () => void;
+}
+
+export const useRepoIssuesMutation = ({
+  onSuccess,
+}: UseRepoIssuesMutationProps) => {
+  return useMutation({
+    mutationFn: createRepoIssue,
+    onSuccess,
+  });
 };
 
 export const useRepoIssuesQuery = ({ page, per_page }: RepoIssuesParams) => {
