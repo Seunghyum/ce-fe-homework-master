@@ -57,43 +57,16 @@ const ModalStack = ({
     <>
       {modals.length > 0 && (
         <div
-          // className="modal-backdrop"
           onClick={closeModal}
           className="fixed inset-0 bg-black/50 z-[1000]"
-          // style={{
-          //   position: "fixed",
-          //   inset: 0,
-          //   background: "rgba(0,0,0,0.5)",
-          //   zIndex: 1000,
-          // }}
         />
       )}
       {modals.map((Modal, idx) => (
         <div
           key={idx}
-          // className="modal-container"
           className="fixed inset-0 z-[1001] flex justify-center items-center overflow-auto"
-          // style={{
-          //   position: "fixed",
-          //   inset: 0,
-          //   zIndex: 1001 + idx,
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   overflow: "auto",
-          // }}
         >
-          <div
-            className="bg-white p-4 rounded-md max-h-[90vh] overflow-y-auto shadow-md"
-            // style={{
-            //   background: "white",
-            //   padding: "1rem",
-            //   borderRadius: "8px",
-            //   maxHeight: "90vh",
-            //   overflowY: "auto",
-            //   boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
-            // }}
-          >
+          <div className="bg-white p-4 rounded-md max-h-[90vh] overflow-y-auto shadow-md">
             {Modal}
           </div>
         </div>
