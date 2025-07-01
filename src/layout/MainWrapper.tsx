@@ -3,5 +3,5 @@ export default function MainWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="p-4 w-full">{children}</div>;
+  return <div className="p-4 w-full overflow-y-auto flex-1">{children}</div>;
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function SidebarLNB() {
   return (
-    <div className="p-4 w-64">
+    <div className="p-4 w-64 border-r border-gray-200">
       <nav>
         <ul className="flex flex-col gap-2">
           <Link href="/">

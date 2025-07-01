@@ -21,9 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKR.className} antialiased`}>
+      <body
+        className={`${notoSansKR.className} antialiased flex flex-col h-screen`}
+      >
         <HeaderGNB />
-        <div className="flex">
+        <div className="flex flex-1 overflow-hidden">
           <SidebarLNB />
           <MainWrapper>{children}</MainWrapper>
         </div>
