@@ -6,11 +6,12 @@ const PREFIX = "repoIssues";
 
 export const repoIssuesKey = {
   all: [PREFIX],
-  list: (page: number) => [PREFIX, page],
+  list: (page: number, search?: string) => [PREFIX, page, search],
   detail: (id: string) => [PREFIX, "detail", id],
 };
 
 interface RepoIssuesParams {
+  search?: string;
   page: number;
   per_page?: number;
 }
@@ -18,15 +19,19 @@ interface RepoIssuesParams {
 export const fetchRepoIssues = async ({
   page,
   per_page = 10,
+  search,
 }: RepoIssuesParams) => {
-  const response = (await octokit.request(
-    `GET /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues`,
-    { per_page, page }
-  )) as RepoIssuesResponse;
+  let query = `repo:${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO} is:issue`;
+  if (search) query += ` in:title ${search}`;
+  const response = await octokit.request("GET /search/issues", {
+    q: query,
+    page,
+    per_page,
+  });
 
   return {
-    data: response.data,
-    total_pages: getTotalPagesFromLinkHeader(response.headers.link),
+    data: response.data.items,
+    total_pages: Math.ceil(response.data.total_count / per_page),
   };
 };
 
@@ -79,10 +84,14 @@ export const useCreateRepoIssuesMutation = () => {
   });
 };
 
-export const useRepoIssuesQuery = ({ page, per_page }: RepoIssuesParams) => {
+export const useRepoIssuesQuery = ({
+  page,
+  per_page,
+  search,
+}: RepoIssuesParams) => {
   return useQuery({
-    queryKey: repoIssuesKey.list(page),
-    queryFn: () => fetchRepoIssues({ page, per_page }),
+    queryKey: repoIssuesKey.list(page, search),
+    queryFn: () => fetchRepoIssues({ page, per_page, search }),
   });
 };
 
@@ -92,14 +101,17 @@ export const useRepoIssueByIdQuery = (id: string) => {
     queryFn: () => fetchRepoIssueById(id),
   });
 };
-
 export interface RepoIssuesResponse {
   url: string;
   status: number;
-  data: Issue[];
-  headers: {
-    link: string;
-  };
+  headers: Headers;
+  data: Data;
+}
+
+export interface Data {
+  total_count: number;
+  incomplete_results: boolean;
+  items: Issue[];
 }
 
 export interface Issue {
@@ -115,7 +127,7 @@ export interface Issue {
   title: string;
   user: User;
   labels: any[];
-  state: string;
+  state: State;
   locked: boolean;
   assignee: null;
   assignees: any[];
@@ -124,15 +136,88 @@ export interface Issue {
   created_at: Date;
   updated_at: Date;
   closed_at: null;
-  author_association: string;
+  author_association: AuthorAssociation;
   active_lock_reason: null;
   sub_issues_summary: SubIssuesSummary;
-  body: null | string;
-  closed_by: null;
+  body: string;
   reactions: Reactions;
   timeline_url: string;
   performed_via_github_app: null;
   state_reason: null;
+  score: number;
+}
+
+export enum AuthorAssociation {
+  Owner = "OWNER",
+}
+
+export interface Reactions {
+  url: string;
+  total_count: number;
+  "+1": number;
+  "-1": number;
+  laugh: number;
+  hooray: number;
+  confused: number;
+  heart: number;
+  rocket: number;
+  eyes: number;
+}
+
+export enum State {
+  Open = "open",
+}
+
+export interface SubIssuesSummary {
+  total: number;
+  completed: number;
+  percent_completed: number;
+}
+
+export interface RepoIssuesResponse {
+  url: string;
+  status: number;
+  headers: Headers;
+  data: Data;
+}
+
+export interface Data {
+  total_count: number;
+  incomplete_results: boolean;
+  items: Issue[];
+}
+
+export interface Issue {
+  url: string;
+  repository_url: string;
+  labels_url: string;
+  comments_url: string;
+  events_url: string;
+  html_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  user: User;
+  labels: any[];
+  state: State;
+  locked: boolean;
+  assignee: null;
+  assignees: any[];
+  milestone: null;
+  comments: number;
+  created_at: Date;
+  updated_at: Date;
+  closed_at: null;
+  author_association: AuthorAssociation;
+  active_lock_reason: null;
+  sub_issues_summary: SubIssuesSummary;
+  body: string;
+  reactions: Reactions;
+  timeline_url: string;
+  performed_via_github_app: null;
+  state_reason: null;
+  score: number;
 }
 
 export interface Reactions {

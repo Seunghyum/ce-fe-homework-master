@@ -7,14 +7,16 @@ import { useRouter } from "next/navigation";
 import { PATH } from "@/constants/path";
 import { parsePath } from "@/utils/path";
 import { DropdownButton } from "@/app/components/DropdownButton";
+import { useSearchTextStore } from "@/app/service-board/_stores/useSearchText";
 
 export default function BoardList() {
   const router = useRouter();
   const page = usePaginationStore((state) => state.page);
   const setPage = usePaginationStore((state) => state.setPage);
+  const search = useSearchTextStore((state) => state.search);
 
   const { data: { data, total_pages } = { data: [], total_pages: 1 } } =
-    useRepoIssuesQuery({ page, per_page: 10 });
+    useRepoIssuesQuery({ page, per_page: 10, search });
 
   const handleClickItem = (id: number) => {
     router.push(parsePath(PATH.SERVICE_BOARD_DETAIL, { issueId: id }));
@@ -49,7 +51,7 @@ export default function BoardList() {
             >
               <td className="text-center">{issue.number}</td>
               <td className="text-center">{issue.title}</td>
-              <td className="text-center">{issue.user.login}</td>
+              <td className="text-center">{issue.user?.login}</td>
               <td className="text-center">
                 {issue.created_at.toLocaleString()}
               </td>
