@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import HeaderGNB from "@/layout/HeaderGNB";
+import SidebarLNB from "@/layout/SidebarLNB";
+import MainWrapper from "@/layout/MainWrapper";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -21,7 +23,10 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${notoSansKR.className} antialiased`}>
         <HeaderGNB />
-        {children}
+        <div className="flex">
+          <SidebarLNB />
+          <MainWrapper>{children}</MainWrapper>
+        </div>
       </body>
     </html>
   );
