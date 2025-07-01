@@ -2,13 +2,21 @@ import React, { useState, useRef, useEffect, PropsWithChildren } from "react";
 
 interface DropdownButtonProps {
   data: { title: string; onClick: () => void }[];
+  preventClickBubbling?: boolean;
 }
 
 export const DropdownButton: React.FC<
   PropsWithChildren<DropdownButtonProps>
-> = ({ data, children }) => {
+> = ({ data, preventClickBubbling = false, children }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (preventClickBubbling) {
+      e.stopPropagation();
+    }
+    setOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -26,7 +34,7 @@ export const DropdownButton: React.FC<
       ref={menuRef}
     >
       <button
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={handleClick}
         className="border-none bg-none cursor-pointer text-2xl"
       >
         {children}

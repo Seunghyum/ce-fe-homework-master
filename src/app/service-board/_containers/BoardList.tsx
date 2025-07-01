@@ -16,6 +16,10 @@ export default function BoardList() {
   const { data: { data, total_pages } = { data: [], total_pages: 1 } } =
     useRepoIssuesQuery({ page, per_page: 10 });
 
+  const handleClickItem = (id: number) => {
+    router.push(parsePath(PATH.SERVICE_BOARD_DETAIL, { issueId: id }));
+  };
+
   const handleEdit = (id: number) => {
     console.log(id);
     router.push(parsePath(PATH.SERVICE_BOARD_EDIT, { issueId: id }));
@@ -39,7 +43,11 @@ export default function BoardList() {
         </thead>
         <tbody className="border-r border-gray-200">
           {data.map((issue) => (
-            <tr className="border-b border-l border-gray-200" key={issue.id}>
+            <tr
+              className="border-b border-l border-gray-200 cursor-pointer"
+              onClick={() => handleClickItem(issue.number)}
+              key={issue.id}
+            >
               <td className="text-center">{issue.number}</td>
               <td className="text-center">{issue.title}</td>
               <td className="text-center">{issue.user.login}</td>
@@ -48,6 +56,7 @@ export default function BoardList() {
               </td>
               <td className="text-center">
                 <DropdownButton
+                  preventClickBubbling
                   data={[
                     { title: "수정", onClick: () => handleEdit(issue.number) },
                     {
