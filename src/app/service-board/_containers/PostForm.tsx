@@ -23,7 +23,6 @@ export default function PostForm({ onSubmit }: PostFormProps) {
     <div style={{ maxWidth: "600px", margin: "2rem auto" }}>
       <h2>게시글 작성</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        {/* TITLE */}
         <div style={{ marginBottom: "1rem" }}>
           <label htmlFor="title">제목</label>
           <input
@@ -47,7 +46,6 @@ export default function PostForm({ onSubmit }: PostFormProps) {
           )}
         </div>
 
-        {/* CONTENT */}
         <div style={{ marginBottom: "1rem" }}>
           <label htmlFor="content">내용</label>
           <textarea

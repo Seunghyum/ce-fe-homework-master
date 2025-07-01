@@ -3,13 +3,27 @@
 import { ListPagination } from "@/app/components/ListPagination";
 import { useRepoIssuesQuery } from "@/query/repoIssues";
 import { usePaginationStore } from "../_stores/usePaginationStore";
+import { MoreMenu } from "./MoreMenu";
+import { useRouter } from "next/navigation";
+import { PATH } from "@/constants/path";
+import { parsePath } from "@/utils/path";
 
 export default function BoardList() {
+  const router = useRouter();
   const page = usePaginationStore((state) => state.page);
   const setPage = usePaginationStore((state) => state.setPage);
 
   const { data: { data, total_pages } = { data: [], total_pages: 1 } } =
     useRepoIssuesQuery({ page, per_page: 10 });
+
+  const handleEdit = (id: number) => {
+    console.log(id);
+    router.push(parsePath(PATH.SERVICE_BOARD_EDIT, { issueId: id }));
+  };
+
+  const handleDelete = (id: number) => {
+    console.log(id);
+  };
 
   return (
     <>
@@ -33,7 +47,10 @@ export default function BoardList() {
                 {issue.created_at.toLocaleString()}
               </td>
               <td className="text-center">
-                <button>...</button>
+                <MoreMenu
+                  onEdit={() => handleEdit(issue.id)}
+                  onDelete={() => handleDelete(issue.id)}
+                />
               </td>
             </tr>
           ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { repoIssuesKey, useRepoIssuesMutation } from "@/query/repoIssues";
-import PostForm, { FormValues } from "./_containers/PostForm";
+import PostForm, { FormValues } from "../_containers/PostForm";
 import { PATH } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import { QueryClient, useQueryClient } from "@tanstack/react-query";
