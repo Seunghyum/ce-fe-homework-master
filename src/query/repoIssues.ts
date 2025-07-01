@@ -30,7 +30,7 @@ export const fetchRepoIssues = async ({
   });
 
   return {
-    data: response.data.items,
+    data: response.data.items as unknown as Issue[],
     total_pages: Math.ceil(response.data.total_count / per_page),
   };
 };
