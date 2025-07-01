@@ -21,7 +21,7 @@ export const fetchRepoIssues = async ({
   per_page = 10,
   search,
 }: RepoIssuesParams) => {
-  let query = `repo:${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO} is:issue`;
+  let query = `repo:${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO} is:issue state:open`;
   if (search) query += ` in:title ${search}`;
   const response = await octokit.request("GET /search/issues", {
     q: query,
@@ -36,30 +36,46 @@ export const fetchRepoIssues = async ({
 };
 
 export const fetchRepoIssueById = async (id: string) => {
-  const response = await octokit.request(
-    `GET /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues/${id}`
-  );
-  return response.data as Issue;
+  const response = await octokit.rest.issues.get({
+    owner: process.env.NEXT_PUBLIC_OWNER ?? "",
+    repo: process.env.NEXT_PUBLIC_REPO ?? "",
+    issue_number: parseInt(id),
+  });
+  return response.data;
+};
+
+export const deleteRepoIssue = async (id: string) => {
+  const response = await octokit.rest.issues.update({
+    owner: process.env.NEXT_PUBLIC_OWNER ?? "",
+    repo: process.env.NEXT_PUBLIC_REPO ?? "",
+    issue_number: parseInt(id),
+    state: "closed",
+  });
+
+  return response.data;
 };
 
 export const createRepoIssue = async (data: FormValues) => {
-  const response = await octokit.request(
-    `POST /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues`,
-    {
-      owner: process.env.NEXT_PUBLIC_OWNER,
-      repo: process.env.NEXT_PUBLIC_REPO,
-      title: data.title,
-      body: data.content,
-    }
-  );
+  const response = await octokit.rest.issues.create({
+    owner: process.env.NEXT_PUBLIC_OWNER ?? "",
+    repo: process.env.NEXT_PUBLIC_REPO ?? "",
+    title: data.title,
+    body: data.content,
+  });
 
   return response.data;
 };
 
 export const updateRepoIssue = async (id: string, data: FormValues) => {
   const response = await octokit.request(
-    `PATCH /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues/${id}`,
-    { title: data.title, body: data.content }
+    `PATCH /repos/{owner}/{repo}/issues/{issue_number}`,
+    {
+      owner: process.env.NEXT_PUBLIC_OWNER ?? "",
+      repo: process.env.NEXT_PUBLIC_REPO ?? "",
+      issue_number: parseInt(id),
+      title: data.title,
+      body: data.content,
+    }
   );
   return response.data;
 };
@@ -78,6 +94,16 @@ export const useCreateRepoIssuesMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createRepoIssue,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: repoIssuesKey.all });
+    },
+  });
+};
+
+export const useDeleteRepoIssueMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteRepoIssue,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: repoIssuesKey.all });
     },

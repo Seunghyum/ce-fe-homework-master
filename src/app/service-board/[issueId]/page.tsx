@@ -8,10 +8,11 @@ import {
 import PostDetail from "./_containers/PostDetail";
 
 export default async function IssueDetailPage({
-  params: { issueId },
+  params,
 }: {
-  params: { issueId: string };
+  params: Promise<{ issueId: string }>;
 }) {
+  const { issueId } = await params;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: repoIssuesKey.detail(issueId),
