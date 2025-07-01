@@ -4,8 +4,7 @@ import {
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import BoardList from "@/app/service-board/_containers/BoardList";
-import ToolBar from "./_containers/ToolBar";
+import BoardView from "@/app/service-board/_containers/BoardView";
 import SubHeader from "@/layout/SubHeader";
 
 export default async function ServiceBoardPage() {
@@ -17,9 +16,8 @@ export default async function ServiceBoardPage() {
 
   return (
     <SubHeader title="서비스 게시판">
-      <ToolBar />
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <BoardList />
+        <BoardView />
       </HydrationBoundary>
     </SubHeader>
   );

@@ -1,7 +1,15 @@
-import React, { useState, useRef, useEffect, PropsWithChildren } from "react";
+"use client";
+
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  PropsWithChildren,
+  ReactNode,
+} from "react";
 
 interface DropdownButtonProps {
-  data: { title: string; onClick: () => void }[];
+  data: { title: ReactNode | string; onClick: () => void }[];
   preventClickBubbling?: boolean;
 }
 
@@ -41,9 +49,9 @@ export const DropdownButton: React.FC<
       </button>
       {open && (
         <div className="absolute top-[30px] right-0 border border-gray-300 bg-white rounded-md shadow-md z-1000 p-2 min-w-40">
-          {data.map(({ title, onClick }) => (
+          {data.map(({ title, onClick }, index) => (
             <button
-              key={title}
+              key={index}
               onClick={(e) => {
                 if (preventClickBubbling) e.stopPropagation();
                 onClick();
