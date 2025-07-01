@@ -14,8 +14,12 @@ export default async function Home() {
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <BoardList />
-    </HydrationBoundary>
+    <>
+      <h1 className="text-2xl font-bold mb-4">서비스 게시판</h1>
+
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <BoardList />
+      </HydrationBoundary>
+    </>
   );
 }
