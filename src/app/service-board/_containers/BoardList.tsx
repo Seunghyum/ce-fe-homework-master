@@ -48,6 +48,14 @@ export default function BoardList() {
     );
   };
 
+  if (data.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        등록된 게시글이 없습니다. 새글을 등록해보세요.
+      </div>
+    );
+  }
+
   return (
     <>
       <table className="w-full border-collapse border-spacing-0">
