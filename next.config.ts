@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 
 const nextConfig: NextConfig = {
   env: dotenv.config().parsed,
