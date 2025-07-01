@@ -1,7 +1,5 @@
-import octokit from "@/lib/octokit";
+import octokit, { getTotalPagesFromLinkHeader } from "@/lib/octokit";
 import { useQuery } from "@tanstack/react-query";
-
-const { NEXT_PUBLIC_OWNER, NEXT_PUBLIC_REPO } = process.env;
 
 const PREFIX = "repoIssues";
 
@@ -19,11 +17,16 @@ export const fetchRepoIssues = async ({
   per_page = 10,
 }: RepoIssuesParams) => {
   const response = (await octokit.request(
-    `GET /repos/${NEXT_PUBLIC_OWNER}/${NEXT_PUBLIC_REPO}/issues`,
+    `GET /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues`,
     { per_page, page }
   )) as RepoIssuesResponse;
 
-  return response.data;
+  console.log(response.headers.link);
+
+  return {
+    data: response.data,
+    total_pages: getTotalPagesFromLinkHeader(response.headers.link),
+  };
 };
 
 export const useRepoIssuesQuery = ({ page, per_page }: RepoIssuesParams) => {
@@ -37,6 +40,9 @@ export interface RepoIssuesResponse {
   url: string;
   status: number;
   data: Datum[];
+  headers: {
+    link: string;
+  };
 }
 
 export interface Datum {
