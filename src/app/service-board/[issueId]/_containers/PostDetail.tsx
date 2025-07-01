@@ -1,7 +1,10 @@
 "use client";
 
 import { PATH } from "@/constants/path";
-import { useRepoIssueByIdQuery } from "@/query/repoIssues";
+import {
+  useDeleteRepoIssueMutation,
+  useRepoIssueByIdQuery,
+} from "@/query/repoIssues";
 import Link from "next/link";
 import { parsePath } from "@/utils/path";
 import { useRouter } from "next/navigation";
@@ -11,6 +14,7 @@ import AlertModal from "@/app/components/AlertModal";
 
 export default function PostDetail({ issueId }: { issueId: string }) {
   const router = useRouter();
+  const { mutate: deleteIssue } = useDeleteRepoIssueMutation();
   const { data } = useRepoIssueByIdQuery(issueId);
   const { openModal } = useModal();
   const handleEdit = () => {
@@ -22,7 +26,8 @@ export default function PostDetail({ issueId }: { issueId: string }) {
         title="게시글 삭제"
         message="게시글을 삭제하시겠습니까?"
         onConfirm={() => {
-          console.log(issueId);
+          deleteIssue(issueId);
+          router.push(parsePath(PATH.SERVICE_BOARD));
         }}
       />
     );
@@ -45,7 +50,7 @@ export default function PostDetail({ issueId }: { issueId: string }) {
         </DropdownButton>
       </div>
       <p className="text-sm text-gray-500">
-        {data?.user.login} | {data?.created_at.toLocaleString()}
+        {data?.user?.login} | {data?.created_at.toLocaleString()}
       </p>
       <hr className="my-4" />
 
