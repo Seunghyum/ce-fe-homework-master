@@ -1,3 +1,6 @@
+import { PATH } from "@/constants/path";
+import Link from "next/link";
+
 export default function ToolBar() {
   return (
     <div className="mb-4 flex justify-between items-center">
@@ -6,7 +9,11 @@ export default function ToolBar() {
         <button className="border border-gray-300 rounded-md p-2">검색</button>
       </div>
       <div className="flex items-center gap-2">
-        <button className="border border-gray-300 rounded-md p-2">등록</button>
+        <Link href={PATH.SERVICE_BOARD_CREATE}>
+          <button className="border border-gray-300 rounded-md p-2">
+            등록
+          </button>
+        </Link>
       </div>
     </div>
   );
