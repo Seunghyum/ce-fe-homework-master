@@ -17,13 +17,13 @@ export default function AlertModal({
       <p className="text-sm">{message}</p>
       <div className="flex justify-end gap-2">
         <button
-          className="border border-gray-300 rounded-md p-2 cursor-pointer"
+          className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
           onClick={closeModal}
         >
           취소
         </button>
         <button
-          className="border border-gray-300 rounded-md p-2 cursor-pointer"
+          className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
           onClick={() => {
             onConfirm();
             closeModal();

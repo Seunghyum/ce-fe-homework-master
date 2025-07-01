@@ -20,7 +20,11 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const closeModal = () => {
-    setModals((prev) => prev.slice(0, -1));
+    if (modals.length > 1) {
+      setModals((prev) => prev.slice(0, -1));
+    } else {
+      setModals([]);
+    }
   };
 
   const closeAll = () => {
@@ -64,7 +68,7 @@ const ModalStack = ({
       {modals.map((Modal, idx) => (
         <div
           key={idx}
-          className="fixed inset-0 z-[1001] flex justify-center items-center overflow-auto"
+          className="fixed inset-0 z-[1010] flex justify-center items-center overflow-auto pointer-events-none"
         >
           <div className="bg-white p-4 rounded-md max-h-[90vh] overflow-y-auto shadow-md">
             {Modal}
