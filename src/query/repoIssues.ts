@@ -152,11 +152,9 @@ export interface Issue {
   number: number;
   title: string;
   user: User;
-  labels: any[];
   state: State;
   locked: boolean;
   assignee: null;
-  assignees: any[];
   milestone: null;
   comments: number;
   created_at: Date;
@@ -225,11 +223,9 @@ export interface Issue {
   number: number;
   title: string;
   user: User;
-  labels: any[];
   state: State;
   locked: boolean;
   assignee: null;
-  assignees: any[];
   milestone: null;
   comments: number;
   created_at: Date;
