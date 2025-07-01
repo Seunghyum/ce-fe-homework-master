@@ -3,10 +3,10 @@
 import { ListPagination } from "@/app/components/ListPagination";
 import { useRepoIssuesQuery } from "@/query/repoIssues";
 import { usePaginationStore } from "../_stores/usePaginationStore";
-import { MoreMenu } from "./MoreMenu";
 import { useRouter } from "next/navigation";
 import { PATH } from "@/constants/path";
 import { parsePath } from "@/utils/path";
+import { DropdownButton } from "@/app/components/DropdownButton";
 
 export default function BoardList() {
   const router = useRouter();
@@ -47,10 +47,17 @@ export default function BoardList() {
                 {issue.created_at.toLocaleString()}
               </td>
               <td className="text-center">
-                <MoreMenu
-                  onEdit={() => handleEdit(issue.number)}
-                  onDelete={() => handleDelete(issue.number)}
-                />
+                <DropdownButton
+                  data={[
+                    { title: "수정", onClick: () => handleEdit(issue.number) },
+                    {
+                      title: "삭제",
+                      onClick: () => handleDelete(issue.number),
+                    },
+                  ]}
+                >
+                  ···
+                </DropdownButton>
               </td>
             </tr>
           ))}

@@ -3,9 +3,9 @@
 import { PATH } from "@/constants/path";
 import { useRepoIssueByIdQuery } from "@/query/repoIssues";
 import Link from "next/link";
-import { MoreMenu } from "../../_containers/MoreMenu";
 import { parsePath } from "@/utils/path";
 import { useRouter } from "next/navigation";
+import { DropdownButton } from "@/app/components/DropdownButton";
 
 export default function PostDetail({ issueId }: { issueId: string }) {
   const router = useRouter();
@@ -22,7 +22,17 @@ export default function PostDetail({ issueId }: { issueId: string }) {
     <div className="border-2 border-gray-200 rounded-md p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold mb-2">{data?.title}</h1>
-        <MoreMenu onEdit={handleEdit} onDelete={handleDelete} />
+        <DropdownButton
+          data={[
+            { title: "수정", onClick: handleEdit },
+            {
+              title: "삭제",
+              onClick: handleDelete,
+            },
+          ]}
+        >
+          ···
+        </DropdownButton>
       </div>
       <p className="text-sm text-gray-500">
         {data?.user.login} | {data?.created_at.toLocaleString()}

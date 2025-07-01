@@ -1,0 +1,49 @@
+import React, { useState, useRef, useEffect, PropsWithChildren } from "react";
+
+interface DropdownButtonProps {
+  data: { title: string; onClick: () => void }[];
+}
+
+export const DropdownButton: React.FC<
+  PropsWithChildren<DropdownButtonProps>
+> = ({ data, children }) => {
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div
+      style={{ position: "relative", display: "inline-block" }}
+      ref={menuRef}
+    >
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className="border-none bg-none cursor-pointer text-2xl"
+      >
+        {children}
+      </button>
+      {open && (
+        <div className="absolute top-[30px] right-0 border border-gray-300 bg-white rounded-md shadow-md z-1000 p-2 min-w-40">
+          {data.map(({ title, onClick }) => (
+            <button
+              key={title}
+              onClick={onClick}
+              className="w-full p-2 text-left cursor-pointer"
+            >
+              {title}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
