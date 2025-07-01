@@ -44,7 +44,10 @@ export const DropdownButton: React.FC<
           {data.map(({ title, onClick }) => (
             <button
               key={title}
-              onClick={onClick}
+              onClick={(e) => {
+                if (preventClickBubbling) e.stopPropagation();
+                onClick();
+              }}
               className="w-full p-2 text-left cursor-pointer"
             >
               {title}
