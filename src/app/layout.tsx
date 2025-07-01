@@ -5,6 +5,7 @@ import HeaderGNB from "@/layout/HeaderGNB";
 import SidebarLNB from "@/layout/SidebarLNB";
 import MainWrapper from "@/layout/MainWrapper";
 import ReactQueryProviders from "@/providers/ReactQueryProvider";
+import { ModalProvider } from "./components/ModalContext";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -26,11 +27,13 @@ export default function RootLayout({
         className={`${notoSansKR.className} antialiased flex flex-col h-screen`}
       >
         <ReactQueryProviders>
-          <HeaderGNB />
-          <div className="flex flex-1 overflow-hidden">
-            <SidebarLNB />
-            <MainWrapper>{children}</MainWrapper>
-          </div>
+          <ModalProvider>
+            <HeaderGNB />
+            <div className="flex flex-1 overflow-hidden">
+              <SidebarLNB />
+              <MainWrapper>{children}</MainWrapper>
+            </div>
+          </ModalProvider>
         </ReactQueryProviders>
       </body>
     </html>
