@@ -18,6 +18,7 @@ import { PATH } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import AlertModal from "@/app/components/AlertModal";
 import { useModal } from "@/app/components/ModalContext";
+import { useIsMounted } from "@/app/hooks/useIsMounted";
 
 export default function BoardView() {
   const router = useRouter();
@@ -27,6 +28,8 @@ export default function BoardView() {
   const page = usePaginationStore((state) => state.page);
   const setPage = usePaginationStore((state) => state.setPage);
   const search = useSearchTextStore((state) => state.search);
+  const isMounted = useIsMounted();
+
   const {
     data: { data, total_pages } = { data: [], total_pages: 1 },
     isFetching,
@@ -66,7 +69,7 @@ export default function BoardView() {
           등록된 게시글이 없습니다. 새글을 등록해보세요.
         </div>
       )}
-      {viewType === VIEW_TYPE.LIST && !isFetching && (
+      {isMounted && viewType === VIEW_TYPE.LIST && !isFetching && (
         <BoardTable
           data={data}
           onEdit={handleEdit}
@@ -74,7 +77,7 @@ export default function BoardView() {
           onDetail={handleClickItem}
         />
       )}
-      {viewType === VIEW_TYPE.CARD && !isFetching && (
+      {isMounted && viewType === VIEW_TYPE.CARD && !isFetching && (
         <BoardCardList
           data={data}
           onEdit={handleEdit}
