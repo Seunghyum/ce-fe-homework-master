@@ -1,5 +1,5 @@
 import { FormValues } from "@/app/service-board/_containers/PostForm";
-import octokit, { getTotalPagesFromLinkHeader } from "@/lib/octokit";
+import octokit from "@/lib/octokit";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const PREFIX = "repoIssues";
