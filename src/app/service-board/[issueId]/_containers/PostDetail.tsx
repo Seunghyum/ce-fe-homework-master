@@ -6,16 +6,26 @@ import Link from "next/link";
 import { parsePath } from "@/utils/path";
 import { useRouter } from "next/navigation";
 import { DropdownButton } from "@/app/components/DropdownButton";
+import { useModal } from "@/app/components/ModalContext";
+import AlertModal from "@/app/components/AlertModal";
 
 export default function PostDetail({ issueId }: { issueId: string }) {
   const router = useRouter();
   const { data } = useRepoIssueByIdQuery(issueId);
-
+  const { openModal } = useModal();
   const handleEdit = () => {
     router.push(parsePath(PATH.SERVICE_BOARD_EDIT, { issueId }));
   };
   const handleDelete = () => {
-    console.log("delete");
+    openModal(
+      <AlertModal
+        title="게시글 삭제"
+        message="게시글을 삭제하시겠습니까?"
+        onConfirm={() => {
+          console.log(issueId);
+        }}
+      />
+    );
   };
 
   return (

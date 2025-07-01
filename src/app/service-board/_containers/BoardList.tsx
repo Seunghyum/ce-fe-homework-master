@@ -8,12 +8,16 @@ import { PATH } from "@/constants/path";
 import { parsePath } from "@/utils/path";
 import { DropdownButton } from "@/app/components/DropdownButton";
 import { useSearchTextStore } from "@/app/service-board/_stores/useSearchText";
+import { useModal } from "@/app/components/ModalContext";
+import AlertModal from "@/app/components/AlertModal";
 
 export default function BoardList() {
   const router = useRouter();
   const page = usePaginationStore((state) => state.page);
   const setPage = usePaginationStore((state) => state.setPage);
   const search = useSearchTextStore((state) => state.search);
+
+  const { openModal, closeModal, closeAll } = useModal();
 
   const { data: { data, total_pages } = { data: [], total_pages: 1 } } =
     useRepoIssuesQuery({ page, per_page: 10, search });
@@ -27,7 +31,15 @@ export default function BoardList() {
   };
 
   const handleDelete = (id: number) => {
-    console.log(id);
+    openModal(
+      <AlertModal
+        title="게시글 삭제"
+        message="게시글을 삭제하시겠습니까?"
+        onConfirm={() => {
+          console.log(id);
+        }}
+      />
+    );
   };
 
   return (
