@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
+const dotenv = require("dotenv");
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  env: dotenv.config().parsed,
 };
 
 export default nextConfig;
