@@ -1,6 +1,6 @@
 import { FormValues } from "@/app/service-board/_containers/PostForm";
 import octokit, { getTotalPagesFromLinkHeader } from "@/lib/octokit";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const PREFIX = "repoIssues";
 
@@ -51,16 +51,31 @@ export const createRepoIssue = async (data: FormValues) => {
   return response.data;
 };
 
-interface UseRepoIssuesMutationProps {
-  onSuccess?: () => void;
-}
+export const updateRepoIssue = async (id: string, data: FormValues) => {
+  const response = await octokit.request(
+    `PATCH /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues/${id}`,
+    { title: data.title, body: data.content }
+  );
+  return response.data;
+};
 
-export const useRepoIssuesMutation = ({
-  onSuccess,
-}: UseRepoIssuesMutationProps) => {
+export const useUpdateRepoIssueMutation = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: FormValues) => updateRepoIssue(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: repoIssuesKey.all });
+    },
+  });
+};
+
+export const useCreateRepoIssuesMutation = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createRepoIssue,
-    onSuccess,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: repoIssuesKey.all });
+    },
   });
 };
 

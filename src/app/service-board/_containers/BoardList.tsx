@@ -21,7 +21,6 @@ export default function BoardList() {
   };
 
   const handleEdit = (id: number) => {
-    console.log(id);
     router.push(parsePath(PATH.SERVICE_BOARD_EDIT, { issueId: id }));
   };
 

@@ -1,6 +1,10 @@
 import SubHeader from "@/layout/SubHeader";
 import { fetchRepoIssueById, repoIssuesKey } from "@/query/repoIssues";
-import { QueryClient } from "@tanstack/react-query";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import PostDetail from "./_containers/PostDetail";
 
 export default async function IssueDetailPage({
@@ -15,7 +19,9 @@ export default async function IssueDetailPage({
   });
   return (
     <SubHeader title="서비스 게시판">
-      <PostDetail issueId={issueId} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <PostDetail issueId={issueId} />
+      </HydrationBoundary>
     </SubHeader>
   );
 }

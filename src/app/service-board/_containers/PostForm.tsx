@@ -2,7 +2,7 @@
 
 import { PATH } from "@/constants/path";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export type FormValues = {
@@ -10,16 +10,29 @@ export type FormValues = {
   content: string;
 };
 
-interface PostFormProps {
+interface PostFormProps extends Partial<FormValues> {
   onSubmit: (data: FormValues) => void;
 }
 
-export default function PostForm({ onSubmit }: PostFormProps) {
+export default function PostForm({ title, content, onSubmit }: PostFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: {
+      title,
+      content,
+    },
+  });
+
+  useEffect(() => {
+    reset({
+      title,
+      content,
+    });
+  }, [reset, title, content]);
 
   return (
     <div style={{ margin: "2rem auto" }}>
@@ -29,21 +42,11 @@ export default function PostForm({ onSubmit }: PostFormProps) {
           <input
             id="title"
             type="text"
-            {...register("title", { required: "내용을 입력해주세요" })}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              border: errors.title ? "1px solid red" : "1px solid #ccc",
-              borderRadius: "4px",
-              marginTop: "0.5rem",
-            }}
+            className="w-full p-2 border border-gray-300 rounded-md mt-2"
+            {...register("title", { required: "제목을 입력해주세요" })}
           />
           {errors.title && (
-            <p
-              style={{ color: "red", marginTop: "0.25rem", fontSize: "0.9rem" }}
-            >
-              {errors.title.message}
-            </p>
+            <p className="text-red-500 mt-1 text-sm">{errors.title.message}</p>
           )}
         </div>
 
@@ -51,20 +54,12 @@ export default function PostForm({ onSubmit }: PostFormProps) {
           <label htmlFor="content">내용</label>
           <textarea
             id="content"
-            {...register("content", { required: "content을 입력해주세요" })}
+            {...register("content", { required: "내용을 입력해주세요" })}
             rows={6}
-            style={{
-              width: "100%",
-              padding: "0.5rem",
-              border: errors.content ? "1px solid red" : "1px solid #ccc",
-              borderRadius: "4px",
-              marginTop: "0.5rem",
-            }}
+            className="w-full p-2 border border-gray-300 rounded-md mt-2"
           />
           {errors.content && (
-            <p
-              style={{ color: "red", marginTop: "0.25rem", fontSize: "0.9rem" }}
-            >
+            <p className="text-red-500 mt-1 text-sm">
               {errors.content.message}
             </p>
           )}
