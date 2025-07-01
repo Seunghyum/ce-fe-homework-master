@@ -22,8 +22,7 @@ export default function PostForm({ onSubmit }: PostFormProps) {
   } = useForm<FormValues>();
 
   return (
-    <div style={{ maxWidth: "600px", margin: "2rem auto" }}>
-      <h2>게시글 작성</h2>
+    <div style={{ margin: "2rem auto" }}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div style={{ marginBottom: "1rem" }}>
           <label htmlFor="title">제목</label>

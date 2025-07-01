@@ -48,8 +48,8 @@ export default function BoardList() {
               </td>
               <td className="text-center">
                 <MoreMenu
-                  onEdit={() => handleEdit(issue.id)}
-                  onDelete={() => handleDelete(issue.id)}
+                  onEdit={() => handleEdit(issue.number)}
+                  onDelete={() => handleDelete(issue.number)}
                 />
               </td>
             </tr>

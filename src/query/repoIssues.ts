@@ -1,4 +1,4 @@
-import { FormValues } from "@/app/service-board/create/_containers/PostForm";
+import { FormValues } from "@/app/service-board/_containers/PostForm";
 import octokit, { getTotalPagesFromLinkHeader } from "@/lib/octokit";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -7,6 +7,7 @@ const PREFIX = "repoIssues";
 export const repoIssuesKey = {
   all: [PREFIX],
   list: (page: number) => [PREFIX, page],
+  detail: (id: string) => [PREFIX, "detail", id],
 };
 
 interface RepoIssuesParams {
@@ -27,6 +28,13 @@ export const fetchRepoIssues = async ({
     data: response.data,
     total_pages: getTotalPagesFromLinkHeader(response.headers.link),
   };
+};
+
+export const fetchRepoIssueById = async (id: string) => {
+  const response = await octokit.request(
+    `GET /repos/${process.env.NEXT_PUBLIC_OWNER}/${process.env.NEXT_PUBLIC_REPO}/issues/${id}`
+  );
+  return response.data as Issue;
 };
 
 export const createRepoIssue = async (data: FormValues) => {
@@ -63,16 +71,23 @@ export const useRepoIssuesQuery = ({ page, per_page }: RepoIssuesParams) => {
   });
 };
 
+export const useRepoIssueByIdQuery = (id: string) => {
+  return useQuery({
+    queryKey: repoIssuesKey.detail(id),
+    queryFn: () => fetchRepoIssueById(id),
+  });
+};
+
 export interface RepoIssuesResponse {
   url: string;
   status: number;
-  data: Datum[];
+  data: Issue[];
   headers: {
     link: string;
   };
 }
 
-export interface Datum {
+export interface Issue {
   url: string;
   repository_url: string;
   labels_url: string;

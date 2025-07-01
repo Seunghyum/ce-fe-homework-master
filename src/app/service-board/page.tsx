@@ -6,8 +6,9 @@ import {
 } from "@tanstack/react-query";
 import BoardList from "@/app/service-board/_containers/BoardList";
 import ToolBar from "./_containers/ToolBar";
+import SubHeader from "@/layout/SubHeader";
 
-export default async function Home() {
+export default async function ServiceBoardPage() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: repoIssuesKey.list(1),
@@ -15,12 +16,11 @@ export default async function Home() {
   });
 
   return (
-    <>
-      <h1 className="text-2xl font-bold mb-4">서비스 게시판</h1>
+    <SubHeader title="서비스 게시판">
       <ToolBar />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <BoardList />
       </HydrationBoundary>
-    </>
+    </SubHeader>
   );
 }
