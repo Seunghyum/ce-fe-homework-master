@@ -1,10 +1,10 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { VIEW_TYPE, ViewType } from "@/constants/viewType";
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+import { VIEW_TYPE, ViewType } from '@/constants/viewType'
 
 interface useViewTypeState {
-  viewType: ViewType;
-  setViewType: (viewType: ViewType) => void;
+  viewType: ViewType
+  setViewType: (viewType: ViewType) => void
 }
 
 export const useViewTypeStore = create<useViewTypeState>()(
@@ -14,7 +14,7 @@ export const useViewTypeStore = create<useViewTypeState>()(
       setViewType: (viewType: ViewType) => set({ viewType }),
     }),
     {
-      name: "view-type-storage", // localStorage key
-    }
-  )
-);
+      name: 'view-type-storage', // localStorage key
+    },
+  ),
+)

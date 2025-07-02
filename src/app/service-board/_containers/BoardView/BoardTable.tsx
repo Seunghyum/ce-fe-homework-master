@@ -1,20 +1,15 @@
-"use client";
+'use client'
 
-import { Issue } from "@/query/repoIssues";
-import { DropdownButton } from "@/app/components/DropdownButton";
+import { Issue } from '@/query/repoIssues'
+import { DropdownButton } from '@/app/components/DropdownButton'
 interface BoardTableProps {
-  data: Issue[]; // 게시글 목록
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-  onDetail: (id: number) => void;
+  data: Issue[] // 게시글 목록
+  onEdit: (id: number) => void
+  onDelete: (id: number) => void
+  onDetail: (id: number) => void
 }
 
-export default function BoardTable({
-  data,
-  onEdit,
-  onDelete,
-  onDetail,
-}: BoardTableProps) {
+export default function BoardTable({ data, onEdit, onDelete, onDetail }: BoardTableProps) {
   return (
     data.length > 0 && (
       <table className="w-full border-collapse border-spacing-0">
@@ -37,19 +32,17 @@ export default function BoardTable({
               <td className="text-center">{issue.number}</td>
               <td className="text-center">{issue.title}</td>
               <td className="text-center">{issue.user?.login}</td>
-              <td className="text-center">
-                {issue.created_at.toLocaleString()}
-              </td>
+              <td className="text-center">{issue.created_at.toLocaleString()}</td>
               <td className="text-center">
                 <DropdownButton
                   preventClickBubbling
                   data={[
                     {
-                      title: "수정",
+                      title: '수정',
                       onClick: () => onEdit(issue.number),
                     },
                     {
-                      title: "삭제",
+                      title: '삭제',
                       onClick: () => onDelete(issue.number),
                     },
                   ]}
@@ -62,5 +55,5 @@ export default function BoardTable({
         </tbody>
       </table>
     )
-  );
+  )
 }

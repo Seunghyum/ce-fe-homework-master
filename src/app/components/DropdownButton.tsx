@@ -1,47 +1,40 @@
-"use client";
+'use client'
 
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  PropsWithChildren,
-  ReactNode,
-} from "react";
+import React, { useState, useRef, useEffect, PropsWithChildren, ReactNode } from 'react'
 
 interface DropdownButtonProps {
-  data: { title: ReactNode | string; onClick: () => void }[];
-  preventClickBubbling?: boolean;
+  data: { title: ReactNode | string; onClick: () => void }[]
+  preventClickBubbling?: boolean
 }
 
-export const DropdownButton: React.FC<
-  PropsWithChildren<DropdownButtonProps>
-> = ({ data, preventClickBubbling = false, children }) => {
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+export const DropdownButton: React.FC<PropsWithChildren<DropdownButtonProps>> = ({
+  data,
+  preventClickBubbling = false,
+  children,
+}) => {
+  const [open, setOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (preventClickBubbling) {
-      e.stopPropagation();
+      e.stopPropagation()
     }
-    setOpen((prev) => !prev);
-  };
+    setOpen((prev) => !prev)
+  }
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setOpen(false);
+        setOpen(false)
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <div className="relative inline-block" ref={menuRef}>
-      <button
-        onClick={handleClick}
-        className="border-none bg-none cursor-pointer text-2xl"
-      >
+      <button onClick={handleClick} className="border-none bg-none cursor-pointer text-2xl">
         {children}
       </button>
       {open && (
@@ -50,8 +43,8 @@ export const DropdownButton: React.FC<
             <button
               key={index}
               onClick={(e) => {
-                if (preventClickBubbling) e.stopPropagation();
-                onClick();
+                if (preventClickBubbling) e.stopPropagation()
+                onClick()
               }}
               className="w-full p-2 text-left cursor-pointer"
             >
@@ -61,5 +54,5 @@ export const DropdownButton: React.FC<
         </div>
       )}
     </div>
-  );
-};
+  )
+}

@@ -1,19 +1,19 @@
-import { useModal } from "./ModalContext";
+import { useModal } from './ModalContext'
 
 export default function AlertModal({
   title,
   message,
   onConfirm,
-  cancelText = "취소",
-  confirmText = "삭제",
+  cancelText = '취소',
+  confirmText = '삭제',
 }: {
-  title: string;
-  message: string;
-  onConfirm: () => void;
-  cancelText?: string;
-  confirmText?: string;
+  title: string
+  message: string
+  onConfirm: () => void
+  cancelText?: string
+  confirmText?: string
 }) {
-  const { closeModal } = useModal();
+  const { closeModal } = useModal()
 
   return (
     <div className="flex flex-col gap-2 min-w-[300px]">
@@ -29,13 +29,13 @@ export default function AlertModal({
         <button
           className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
           onClick={() => {
-            onConfirm();
-            closeModal();
+            onConfirm()
+            closeModal()
           }}
         >
           {confirmText}
         </button>
       </div>
     </div>
-  );
+  )
 }

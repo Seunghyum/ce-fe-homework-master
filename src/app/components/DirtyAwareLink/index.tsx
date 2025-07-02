@@ -1,45 +1,45 @@
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
-import { useDirtyStore } from "./useDirtyStore";
-import AlertModal from "@/app/components/AlertModal";
-import { useModal } from "@/app/components/ModalContext";
+import { useRouter } from 'next/navigation'
+import { useDirtyStore } from './useDirtyStore'
+import AlertModal from '@/app/components/AlertModal'
+import { useModal } from '@/app/components/ModalContext'
 
 export function DirtyAwareLink({
   className,
   href,
   children,
 }: {
-  className?: string;
-  href: string;
-  children: React.ReactNode;
+  className?: string
+  href: string
+  children: React.ReactNode
 }) {
-  const router = useRouter();
-  const { isDirty, setIsDirty } = useDirtyStore();
-  const { openModal } = useModal();
+  const router = useRouter()
+  const { isDirty, setIsDirty } = useDirtyStore()
+  const { openModal } = useModal()
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (isDirty) {
       openModal(
         <AlertModal
           title="안내"
           message="작성 중인 내용이 사라집니다. 페이지를 이동하시겠습니까?"
           onConfirm={() => {
-            setIsDirty(false);
-            router.push(href);
+            setIsDirty(false)
+            router.push(href)
           }}
           confirmText="이동"
-        />
-      );
+        />,
+      )
     } else {
-      router.push(href);
+      router.push(href)
     }
-  };
+  }
 
   return (
     <button className={`cursor-pointer ${className}`} onClick={handleClick}>
       {children}
     </button>
-  );
+  )
 }
