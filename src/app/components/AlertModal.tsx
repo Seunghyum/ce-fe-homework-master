@@ -4,10 +4,14 @@ export default function AlertModal({
   title,
   message,
   onConfirm,
+  cancelText = "취소",
+  confirmText = "삭제",
 }: {
   title: string;
   message: string;
   onConfirm: () => void;
+  cancelText?: string;
+  confirmText?: string;
 }) {
   const { closeModal } = useModal();
 
@@ -20,7 +24,7 @@ export default function AlertModal({
           className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
           onClick={closeModal}
         >
-          취소
+          {cancelText}
         </button>
         <button
           className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
@@ -29,7 +33,7 @@ export default function AlertModal({
             closeModal();
           }}
         >
-          삭제
+          {confirmText}
         </button>
       </div>
     </div>

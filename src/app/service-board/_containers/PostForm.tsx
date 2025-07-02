@@ -1,9 +1,11 @@
 "use client";
 
 import { PATH } from "@/constants/path";
-import Link from "next/link";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useModal } from "@/app/components/ModalContext";
+import { useDirtyStore } from "@/app/components/DirtyAwareLink/useDirtyStore";
+import { DirtyAwareLink } from "@/app/components/DirtyAwareLink";
 
 export type FormValues = {
   title: string;
@@ -19,13 +21,19 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<FormValues>({
     defaultValues: {
       title,
       content,
     },
   });
+  const { openModal } = useModal();
+  const { setIsDirty } = useDirtyStore();
+
+  useEffect(() => {
+    setIsDirty(isDirty);
+  }, [isDirty, setIsDirty]);
 
   useEffect(() => {
     reset({
@@ -33,6 +41,20 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
       content,
     });
   }, [reset, title, content]);
+
+  // 브라우저 새로고침 / 닫기 방지
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isDirty) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isDirty, openModal]);
 
   return (
     <div style={{ margin: "2rem auto" }}>
@@ -67,30 +89,17 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
         <div className="flex justify-between">
           <button
             type="submit"
-            style={{
-              padding: "0.75rem 1.5rem",
-              backgroundColor: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
+            className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
           >
             글 등록하기
           </button>
 
-          <Link href={PATH.SERVICE_BOARD}>
-            <button
-              style={{
-                padding: "0.75rem 1.5rem",
-                border: "1px solid #000",
-                borderRadius: "4px",
-                cursor: "pointer",
-              }}
-            >
-              목록
-            </button>
-          </Link>
+          <DirtyAwareLink
+            className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
+            href={PATH.SERVICE_BOARD}
+          >
+            목록
+          </DirtyAwareLink>
         </div>
       </form>
     </div>
