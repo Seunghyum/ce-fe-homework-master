@@ -1,7 +1,7 @@
 "use client";
 
 import { PATH } from "@/constants/path";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useModal } from "@/app/components/ModalContext";
 import { useDirtyStore } from "@/app/components/DirtyAwareLink/useDirtyStore";
@@ -30,6 +30,25 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
   });
   const { openModal } = useModal();
   const { setIsDirty } = useDirtyStore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
+
+  const debouncedSubmit = useCallback(
+    (data: FormValues) => {
+      if (isSubmittingRef.current) {
+        return;
+      }
+      isSubmittingRef.current = true;
+      setIsSubmitting(true);
+      onSubmit(data);
+
+      setTimeout(() => {
+        isSubmittingRef.current = false;
+        setIsSubmitting(false);
+      }, 1000);
+    },
+    [onSubmit]
+  );
 
   useEffect(() => {
     setIsDirty(isDirty);
@@ -58,7 +77,7 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
 
   return (
     <div style={{ margin: "2rem auto" }}>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(debouncedSubmit)} noValidate>
         <div style={{ marginBottom: "1rem" }}>
           <label htmlFor="title">제목</label>
           <input
@@ -89,9 +108,12 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
         <div className="flex justify-between">
           <button
             type="submit"
-            className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
+            disabled={isSubmitting}
+            className={`border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            글 등록하기
+            {isSubmitting ? "등록 중..." : "글 등록하기"}
           </button>
 
           <DirtyAwareLink
