@@ -5,7 +5,7 @@ interface PaginationState {
   setPage: (page: number) => void;
 }
 
-export const usePaginationStore = create<PaginationState>((set, get) => ({
+export const usePaginationStore = create<PaginationState>((set) => ({
   page: 1,
   setPage: (page) => set({ page }),
 }));

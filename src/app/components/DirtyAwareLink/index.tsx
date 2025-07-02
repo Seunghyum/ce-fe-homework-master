@@ -33,7 +33,6 @@ export function DirtyAwareLink({
         />
       );
     } else {
-      console.log("!!!!");
       router.push(href);
     }
   };
