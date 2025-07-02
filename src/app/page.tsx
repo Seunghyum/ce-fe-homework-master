@@ -1,9 +1,12 @@
 'use client'
 
 import Image from 'next/image'
+
+import { useMemo } from 'react'
+
 import { useViewTypeStore } from '@/app/service-board/_containers/BoardView/useViewTypeStore'
 import { VIEW_TYPE } from '@/constants/viewType'
-import { useMemo } from 'react'
+
 import { useIsMounted } from '../hooks/useIsMounted'
 
 const IMAGES = ['img_homework_1.png', 'img_homework_2.png', 'img_homework_3.png', 'img_homework_4.png']

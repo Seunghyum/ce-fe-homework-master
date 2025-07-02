@@ -1,21 +1,22 @@
 'use client'
 
-import { VIEW_TYPE } from '@/constants/viewType'
-
-import BoardTable from './BoardTable'
-import BoardCardList from './BoardCardList'
-import { useViewTypeStore } from './useViewTypeStore'
-import ToolBar from '@/app/service-board/_containers/ToolBar'
-import { ListPagination } from '@/app/components/ListPagination'
-import { usePaginationStore } from '@/app/service-board/_stores/usePaginationStore'
-import { useDeleteRepoIssueMutation, useRepoIssuesQuery } from '@/query/repoIssues'
-import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
-import { parsePath } from '@/utils/path'
-import { PATH } from '@/constants/path'
 import { useRouter } from 'next/navigation'
+
 import AlertModal from '@/app/components/AlertModal'
+import { ListPagination } from '@/app/components/ListPagination'
 import { useModal } from '@/app/components/ModalContext'
+import ToolBar from '@/app/service-board/_containers/ToolBar'
+import { usePaginationStore } from '@/app/service-board/_stores/usePaginationStore'
+import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
+import { PATH } from '@/constants/path'
+import { VIEW_TYPE } from '@/constants/viewType'
 import { useIsMounted } from '@/hooks/useIsMounted'
+import { useDeleteRepoIssueMutation, useRepoIssuesQuery } from '@/query/repoIssues'
+import { parsePath } from '@/utils/path'
+
+import BoardCardList from './BoardCardList'
+import BoardTable from './BoardTable'
+import { useViewTypeStore } from './useViewTypeStore'
 
 export default function BoardView() {
   const router = useRouter()

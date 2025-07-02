@@ -1,6 +1,8 @@
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+
 import SubHeader from '@/layout/SubHeader'
 import { fetchRepoIssueById, repoIssuesKey } from '@/query/repoIssues'
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+
 import PostDetail from './_containers/PostDetail'
 
 export default async function IssueDetailPage({ params }: { params: Promise<{ issueId: string }> }) {

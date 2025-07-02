@@ -1,8 +1,9 @@
 'use client'
 
-import { PATH } from '@/constants/path'
 import { usePathname } from 'next/navigation'
+
 import { DirtyAwareLink } from '@/app/components/DirtyAwareLink'
+import { PATH } from '@/constants/path'
 
 export default function SidebarLNB() {
   const pathname = usePathname()

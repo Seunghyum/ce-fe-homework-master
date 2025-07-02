@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+
 import { VIEW_TYPE, ViewType } from '@/constants/viewType'
 
 interface useViewTypeState {

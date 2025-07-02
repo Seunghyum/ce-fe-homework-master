@@ -1,6 +1,7 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
 import { FormValues } from '@/app/service-board/_containers/PostForm'
 import octokit from '@/lib/octokit'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 const PREFIX = 'repoIssues'
 

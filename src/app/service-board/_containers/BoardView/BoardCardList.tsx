@@ -1,6 +1,6 @@
+import { DropdownButton } from '@/app/components/DropdownButton'
 import PostCard from '@/app/components/PostCard'
 import { Issue } from '@/query/repoIssues'
-import { DropdownButton } from '@/app/components/DropdownButton'
 
 interface BoardCardListProps {
   data: Issue[]

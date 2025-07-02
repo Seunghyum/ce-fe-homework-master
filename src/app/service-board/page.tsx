@@ -1,7 +1,8 @@
-import { fetchRepoIssues, repoIssuesKey } from '@/query/repoIssues'
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
+
 import BoardView from '@/app/service-board/_containers/BoardView'
 import SubHeader from '@/layout/SubHeader'
+import { fetchRepoIssues, repoIssuesKey } from '@/query/repoIssues'
 
 export default async function ServiceBoardPage() {
   const queryClient = new QueryClient()

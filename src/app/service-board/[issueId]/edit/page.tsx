@@ -1,9 +1,11 @@
 'use client'
 
-import { useRepoIssueByIdQuery, useUpdateRepoIssueMutation } from '@/query/repoIssues'
-import PostForm, { FormValues } from '../../_containers/PostForm'
-import { PATH } from '@/constants/path'
 import { useRouter, useParams } from 'next/navigation'
+
+import { PATH } from '@/constants/path'
+import { useRepoIssueByIdQuery, useUpdateRepoIssueMutation } from '@/query/repoIssues'
+
+import PostForm, { FormValues } from '../../_containers/PostForm'
 
 export default function IssueEditPage() {
   const router = useRouter()

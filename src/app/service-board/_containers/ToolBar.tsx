@@ -1,9 +1,11 @@
 'use client'
 
-import { PATH } from '@/constants/path'
 import Link from 'next/link'
-import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
+
 import { useRef } from 'react'
+
+import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
+import { PATH } from '@/constants/path'
 
 export default function ToolBar() {
   const searchRef = useRef<HTMLInputElement>(null)

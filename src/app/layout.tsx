@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_KR } from 'next/font/google'
+
 import './globals.css'
 import HeaderGNB from '@/layout/HeaderGNB'
-import SidebarLNB from '@/layout/SidebarLNB'
 import MainWrapper from '@/layout/MainWrapper'
+import SidebarLNB from '@/layout/SidebarLNB'
 import ReactQueryProviders from '@/providers/ReactQueryProvider'
+
 import { ModalProvider } from './components/ModalContext'
 
 const notoSansKR = Noto_Sans_KR({

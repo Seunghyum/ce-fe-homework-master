@@ -1,13 +1,14 @@
 'use client'
 
-import { PATH } from '@/constants/path'
-import { useDeleteRepoIssueMutation, useRepoIssueByIdQuery } from '@/query/repoIssues'
 import Link from 'next/link'
-import { parsePath } from '@/utils/path'
 import { useRouter } from 'next/navigation'
+
+import AlertModal from '@/app/components/AlertModal'
 import { DropdownButton } from '@/app/components/DropdownButton'
 import { useModal } from '@/app/components/ModalContext'
-import AlertModal from '@/app/components/AlertModal'
+import { PATH } from '@/constants/path'
+import { useDeleteRepoIssueMutation, useRepoIssueByIdQuery } from '@/query/repoIssues'
+import { parsePath } from '@/utils/path'
 
 export default function PostDetail({ issueId }: { issueId: string }) {
   const router = useRouter()

@@ -1,7 +1,7 @@
 'use client'
 
-import { Issue } from '@/query/repoIssues'
 import { DropdownButton } from '@/app/components/DropdownButton'
+import { Issue } from '@/query/repoIssues'
 interface BoardTableProps {
   data: Issue[] // 게시글 목록
   onEdit: (id: number) => void

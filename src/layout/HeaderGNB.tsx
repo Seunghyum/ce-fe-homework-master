@@ -1,8 +1,8 @@
 'use client'
 
 import { DropdownButton } from '@/app/components/DropdownButton'
-import { VIEW_TYPE, ViewType } from '@/constants/viewType'
 import { useViewTypeStore } from '@/app/service-board/_containers/BoardView/useViewTypeStore'
+import { VIEW_TYPE, ViewType } from '@/constants/viewType'
 
 export default function HeaderGNB() {
   const viewType = useViewTypeStore((state) => state.viewType)
