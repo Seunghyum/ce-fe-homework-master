@@ -9,9 +9,9 @@ import PostForm, { FormValues } from '../_containers/PostForm'
 
 export default function CreatePage() {
   const router = useRouter()
-  const { mutate } = useCreateRepoIssuesMutation()
-  const onSubmit = (data: FormValues) => {
-    mutate(data)
+  const { mutateAsync } = useCreateRepoIssuesMutation()
+  const onSubmit = async (data: FormValues) => {
+    await mutateAsync(data)
     router.push(PATH.SERVICE_BOARD)
   }
 

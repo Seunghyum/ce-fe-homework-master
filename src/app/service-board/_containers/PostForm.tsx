@@ -14,7 +14,7 @@ export type FormValues = {
 }
 
 interface PostFormProps extends Partial<FormValues> {
-  onSubmit: (data: FormValues) => void
+  onSubmit: (data: FormValues) => Promise<void>
 }
 
 export default function PostForm({ title, content, onSubmit }: PostFormProps) {
@@ -35,18 +35,22 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
   const isSubmittingRef = useRef(false)
 
   const debouncedSubmit = useCallback(
-    (data: FormValues) => {
+    async (data: FormValues) => {
       if (isSubmittingRef.current) {
         return
       }
       isSubmittingRef.current = true
       setIsSubmitting(true)
-      onSubmit(data)
-
-      setTimeout(() => {
-        isSubmittingRef.current = false
-        setIsSubmitting(false)
-      }, 1000)
+      try {
+        await onSubmit(data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setTimeout(() => {
+          isSubmittingRef.current = false
+          setIsSubmitting(false)
+        }, 1000)
+      }
     },
     [onSubmit],
   )

@@ -11,9 +11,9 @@ export default function IssueEditPage() {
   const router = useRouter()
   const { issueId } = useParams<{ issueId: string }>()
   const { data } = useRepoIssueByIdQuery(issueId)
-  const { mutate } = useUpdateRepoIssueMutation(issueId)
-  const onSubmit = (data: FormValues) => {
-    mutate(data)
+  const { mutateAsync } = useUpdateRepoIssueMutation(issueId)
+  const onSubmit = async (data: FormValues) => {
+    await mutateAsync(data)
     router.push(PATH.SERVICE_BOARD)
   }
 
