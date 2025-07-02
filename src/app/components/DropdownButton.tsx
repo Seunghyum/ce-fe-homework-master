@@ -37,10 +37,7 @@ export const DropdownButton: React.FC<
   }, []);
 
   return (
-    <div
-      style={{ position: "relative", display: "inline-block" }}
-      ref={menuRef}
-    >
+    <div className="relative inline-block" ref={menuRef}>
       <button
         onClick={handleClick}
         className="border-none bg-none cursor-pointer text-2xl"

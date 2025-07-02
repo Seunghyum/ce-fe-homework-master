@@ -76,9 +76,9 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
   }, [isDirty, openModal]);
 
   return (
-    <div style={{ margin: "2rem auto" }}>
+    <div className="m-auto">
       <form onSubmit={handleSubmit(debouncedSubmit)} noValidate>
-        <div style={{ marginBottom: "1rem" }}>
+        <div className="mb-4">
           <label htmlFor="title">제목</label>
           <input
             id="title"
@@ -91,7 +91,7 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
           )}
         </div>
 
-        <div style={{ marginBottom: "1rem" }}>
+        <div className="mb-4">
           <label htmlFor="content">내용</label>
           <textarea
             id="content"

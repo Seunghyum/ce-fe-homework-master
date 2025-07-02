@@ -65,13 +65,11 @@ export const ListPagination: React.FC<ListPaginationProps> = ({
           </span>
         ) : (
           <button
-            className="px-2 py-1 border border-gray-300"
             key={idx}
             onClick={() => onPageChange(page as number)}
-            style={{
-              fontWeight: page === currentPage ? "bold" : "normal",
-              textDecoration: page === currentPage ? "underline" : "none",
-            }}
+            className={`px-2 py-1 border border-gray-300 ${
+              page === currentPage ? "font-bold" : "font-normal"
+            } ${page === currentPage ? "underline" : "none"}`}
           >
             {page}
           </button>
