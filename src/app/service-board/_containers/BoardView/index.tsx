@@ -18,7 +18,7 @@ import { PATH } from "@/constants/path";
 import { useRouter } from "next/navigation";
 import AlertModal from "@/app/components/AlertModal";
 import { useModal } from "@/app/components/ModalContext";
-import { useIsMounted } from "@/app/hooks/useIsMounted";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 export default function BoardView() {
   const router = useRouter();
