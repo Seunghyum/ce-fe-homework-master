@@ -60,7 +60,9 @@ export const ListPagination: React.FC<ListPaginationProps> = ({
       </button>
       {pageNumbers.map((page, idx) =>
         page === "..." ? (
-          <span key={idx}>...</span>
+          <span className="px-2 py-1 border border-gray-300" key={idx}>
+            ...
+          </span>
         ) : (
           <button
             className="px-2 py-1 border border-gray-300"
