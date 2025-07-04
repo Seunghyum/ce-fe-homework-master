@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
-
+import { PrefetchBoundary } from '@/hoc/PrefetchBoundary'
 import SubHeader from '@/layout/SubHeader'
 import { fetchRepoIssueById, repoIssuesKey } from '@/query/repoIssues'
 
@@ -13,21 +12,15 @@ export default async function IssueDetailPage({ params }: { params: Promise<{ is
   return (
     <SubHeader title="서비스 게시판">
       <Suspense fallback={<div className="flex h-full items-center justify-center">Loading...</div>}>
-        <PrefetchPostDetail issueId={issueId} />
+        <PrefetchBoundary
+          prefetchOptions={{
+            queryKey: repoIssuesKey.detail(issueId),
+            queryFn: () => fetchRepoIssueById(issueId),
+          }}
+        >
+          <PostDetail issueId={issueId} />
+        </PrefetchBoundary>
       </Suspense>
     </SubHeader>
-  )
-}
-
-export async function PrefetchPostDetail({ issueId }: { issueId: string }) {
-  const queryClient = new QueryClient()
-  await queryClient.prefetchQuery({
-    queryKey: repoIssuesKey.detail(issueId),
-    queryFn: () => fetchRepoIssueById(issueId),
-  })
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <PostDetail issueId={issueId} />
-    </HydrationBoundary>
   )
 }
