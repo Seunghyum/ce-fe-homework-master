@@ -4,21 +4,25 @@ import Link from 'next/link'
 
 import { useRef } from 'react'
 
+import { usePaginationStore } from '@/app/service-board/_stores/usePaginationStore'
 import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
 import { PATH } from '@/constants/path'
 
 export default function ToolBar() {
   const searchRef = useRef<HTMLInputElement>(null)
+  const setPage = usePaginationStore((state) => state.setPage)
   const setSearch = useSearchTextStore((state) => state.setSearch)
 
   const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       setSearch(e.currentTarget.value)
+      setPage(1)
     }
   }
 
   const handleClickSearch = () => {
     setSearch(searchRef.current?.value ?? '')
+    setPage(1)
   }
 
   return (
