@@ -1,7 +1,7 @@
 'use client'
 
 import { DropdownButton } from '@/app/components/DropdownButton'
-import { useViewTypeStore } from '@/app/service-board/_containers/BoardView/useViewTypeStore'
+import { useViewTypeStore } from '@/app/service-board/_stores/useViewTypeStore'
 import { VIEW_TYPE, ViewType } from '@/constants/viewType'
 
 export default function HeaderGNB() {

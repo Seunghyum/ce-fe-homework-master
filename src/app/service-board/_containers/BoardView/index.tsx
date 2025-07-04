@@ -3,39 +3,26 @@
 import { useRouter } from 'next/navigation'
 
 import AlertModal from '@/app/components/AlertModal'
-import { ListPagination } from '@/app/components/ListPagination'
 import { useModal } from '@/app/components/ModalContext'
-import { usePaginationStore } from '@/app/service-board/_stores/usePaginationStore'
-import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
+import useRepoIssues from '@/app/service-board/_hooks/useRepoIssues'
+import { useViewTypeStore } from '@/app/service-board/_stores/useViewTypeStore'
 import { PATH } from '@/constants/path'
 import { VIEW_TYPE } from '@/constants/viewType'
 import { useIsMounted } from '@/hooks/useIsMounted'
-import { useDeleteRepoIssueMutation, useRepoIssuesQuery } from '@/query/repoIssues'
+import { useDeleteRepoIssueMutation } from '@/query/repoIssues'
 import { parsePath } from '@/utils/path'
 
 import BoardCardList from './BoardCardList'
 import BoardTable from './BoardTable'
-import { useViewTypeStore } from './useViewTypeStore'
 
 export default function BoardView() {
   const router = useRouter()
   const { openModal, closeModal } = useModal()
   const { mutate: deleteIssue } = useDeleteRepoIssueMutation()
   const viewType = useViewTypeStore((state) => state.viewType)
-  const page = usePaginationStore((state) => state.page)
-  const setPage = usePaginationStore((state) => state.setPage)
-  const search = useSearchTextStore((state) => state.search)
   const isMounted = useIsMounted()
 
-  const {
-    data: { data, total_pages } = { data: [], total_pages: 1 },
-    isFetching,
-    isFetched,
-  } = useRepoIssuesQuery({
-    page,
-    per_page: 10,
-    search,
-  })
+  const { data, isFetching } = useRepoIssues()
 
   const handleEdit = (id: number) => {
     router.push(parsePath(PATH.SERVICE_BOARD_EDIT, { issueId: id }))
@@ -68,9 +55,6 @@ export default function BoardView() {
       )}
       {isMounted && viewType === VIEW_TYPE.CARD && !isFetching && (
         <BoardCardList data={data} onEdit={handleEdit} onDelete={handleDelete} onDetail={handleClickItem} />
-      )}
-      {isFetched && data.length > 0 && (
-        <ListPagination currentPage={page} totalPages={total_pages} onPageChange={(newPage) => setPage(newPage)} />
       )}
     </>
   )

@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import { useMemo } from 'react'
 
-import { useViewTypeStore } from '@/app/service-board/_containers/BoardView/useViewTypeStore'
+import { useViewTypeStore } from '@/app/service-board/_stores/useViewTypeStore'
 import { VIEW_TYPE } from '@/constants/viewType'
 
 import { useIsMounted } from '../hooks/useIsMounted'

@@ -1,10 +1,10 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
 
 import BoardView from '@/app/service-board/_containers/BoardView'
+import ListPagination from '@/app/service-board/_containers/ListPagination'
+import ToolBar from '@/app/service-board/_containers/ToolBar'
 import SubHeader from '@/layout/SubHeader'
 import { fetchRepoIssues, repoIssuesKey } from '@/query/repoIssues'
-
-import ToolBar from './_containers/ToolBar'
 
 export default async function ServiceBoardPage() {
   const queryClient = new QueryClient()
@@ -19,6 +19,7 @@ export default async function ServiceBoardPage() {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <BoardView />
       </HydrationBoundary>
+      <ListPagination />
     </SubHeader>
   )
 }

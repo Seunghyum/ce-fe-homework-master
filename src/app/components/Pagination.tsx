@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
-interface ListPaginationProps {
+interface PaginationProps {
   totalPages: number
   currentPage: number
   onPageChange: (page: number) => void
 }
 
-export const ListPagination: React.FC<ListPaginationProps> = ({ totalPages, currentPage, onPageChange }) => {
-  const getPageNumbers = () => {
+export const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPageChange }) => {
+  const pageNumbers = useMemo(() => {
     const pages: (number | string)[] = []
 
     if (totalPages <= 7) {
@@ -25,9 +25,7 @@ export const ListPagination: React.FC<ListPaginationProps> = ({ totalPages, curr
     }
 
     return pages
-  }
-
-  const pageNumbers = getPageNumbers()
+  }, [totalPages, currentPage])
 
   return (
     <div className="float-right mt-4">
