@@ -34,7 +34,7 @@ export default function PostDetail({ issueId }: { issueId: string }) {
   return (
     <div className="rounded-md border-2 border-gray-200 p-4">
       <div className="flex items-center justify-between">
-        <h1 className="mb-2 text-2xl font-bold">{data?.title}</h1>
+        <h1 className="mb-2 text-2xl font-bold">{data.title}</h1>
         <DropdownButton
           data={[
             { title: '수정', onClick: handleEdit },

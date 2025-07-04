@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 
 import { FormValues } from '@/app/service-board/_containers/PostForm'
 import octokit from '@/lib/octokit'
@@ -105,14 +105,14 @@ export const useDeleteRepoIssueMutation = () => {
 }
 
 export const useRepoIssuesQuery = ({ page, per_page, search }: RepoIssuesParams) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: repoIssuesKey.list(page, search),
     queryFn: () => fetchRepoIssues({ page, per_page, search }),
   })
 }
 
 export const useRepoIssueByIdQuery = (id: string) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: repoIssuesKey.detail(id),
     queryFn: () => fetchRepoIssueById(id),
   })

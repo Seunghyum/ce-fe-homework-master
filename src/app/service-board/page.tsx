@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
 
 import BoardView from '@/app/service-board/_containers/BoardView'
@@ -16,10 +18,23 @@ export default async function ServiceBoardPage() {
   return (
     <SubHeader title="서비스 게시판">
       <ToolBar />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <BoardView />
-      </HydrationBoundary>
+      <Suspense fallback={<div className="flex h-full items-center justify-center">Loading...</div>}>
+        <PrefetchBoardView />
+      </Suspense>
       <ListPagination />
     </SubHeader>
+  )
+}
+
+export async function PrefetchBoardView() {
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: repoIssuesKey.list(1),
+    queryFn: () => fetchRepoIssues({ page: 1 }),
+  })
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <BoardView />
+    </HydrationBoundary>
   )
 }
