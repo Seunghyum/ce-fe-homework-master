@@ -6,10 +6,21 @@ import BoardView from '@/app/service-board/_containers/BoardView'
 import ListPagination from '@/app/service-board/_containers/ListPagination'
 import ToolBar from '@/app/service-board/_containers/ToolBar'
 import { PrefetchBoundary } from '@/hoc/PrefetchBoundary'
+import QueryErrorSuspenseBoundary from '@/hoc/QueryErrorSuspenseBoundary'
 import SubHeader from '@/layout/SubHeader'
 import { fetchRepoIssues, repoIssuesKey } from '@/query/repoIssues'
 
-export default async function ServiceBoardPage() {
+import Loading from '../components/Loading'
+
+export default function ServiceBoardWrapper() {
+  return (
+    <QueryErrorSuspenseBoundary>
+      <ServiceBoard />
+    </QueryErrorSuspenseBoundary>
+  )
+}
+
+export async function ServiceBoard() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: repoIssuesKey.list(1),
@@ -19,7 +30,7 @@ export default async function ServiceBoardPage() {
   return (
     <SubHeader title="서비스 게시판">
       <ToolBar />
-      <Suspense fallback={<div className="flex h-full items-center justify-center">Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <PrefetchBoundary
           prefetchOptions={{
             queryKey: repoIssuesKey.list(1),

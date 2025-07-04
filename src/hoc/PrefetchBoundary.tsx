@@ -1,3 +1,5 @@
+'use server'
+
 import { dehydrate, HydrationBoundary, QueryClient, UsePrefetchQueryOptions } from '@tanstack/react-query'
 
 type Props = {

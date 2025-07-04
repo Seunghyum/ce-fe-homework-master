@@ -10,6 +10,7 @@ function makeQueryClient() {
       queries: {
         refetchOnWindowFocus: false,
         refetchOnMount: true,
+        retry: 0,
         placeholderData: keepPreviousData,
       },
     },

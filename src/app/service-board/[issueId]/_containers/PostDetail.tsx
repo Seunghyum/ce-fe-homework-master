@@ -7,10 +7,25 @@ import AlertModal from '@/app/components/AlertModal'
 import { DropdownButton } from '@/app/components/DropdownButton'
 import { useModal } from '@/app/components/ModalContext'
 import { PATH } from '@/constants/path'
+import QueryErrorSuspenseBoundary from '@/hoc/QueryErrorSuspenseBoundary'
 import { useDeleteRepoIssueMutation, useRepoIssueByIdQuery } from '@/query/repoIssues'
 import { parsePath } from '@/utils/path'
 
-export default function PostDetail({ issueId }: { issueId: string }) {
+export default function PostDetailWrapper({ issueId }: { issueId: string }) {
+  return (
+    <QueryErrorSuspenseBoundary
+      errorFallback={
+        <Link href={PATH.SERVICE_BOARD} className="cursor-pointer rounded-md border-1 px-4 py-2 ">
+          목록으로 돌아가기
+        </Link>
+      }
+    >
+      <PostDetail issueId={issueId} />
+    </QueryErrorSuspenseBoundary>
+  )
+}
+
+export function PostDetail({ issueId }: { issueId: string }) {
   const router = useRouter()
   const { mutate: deleteIssue } = useDeleteRepoIssueMutation()
   const { data } = useRepoIssueByIdQuery(issueId)
