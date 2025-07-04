@@ -12,6 +12,7 @@ export default function ToolBar() {
   const searchRef = useRef<HTMLInputElement>(null)
   const setPage = usePaginationStore((state) => state.setPage)
   const setSearch = useSearchTextStore((state) => state.setSearch)
+  const search = useSearchTextStore((state) => state.search)
 
   const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -31,6 +32,7 @@ export default function ToolBar() {
         <input
           ref={searchRef}
           onKeyDown={handleEnterSearch}
+          defaultValue={search}
           className="rounded-md border border-gray-300 p-2"
           type="text"
         />
