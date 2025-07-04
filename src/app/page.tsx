@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     isMounted && (
-      <div className="grid grid-cols-2 gap-4 w-full">
+      <div className="grid w-full grid-cols-2 gap-4">
         {images.map((img) => (
           <Image key={img} src={`/images/${img}`} alt="image" width={1000} height={420} />
         ))}

@@ -12,7 +12,7 @@ export default function SidebarLNB() {
   const isActive = (path: string) => pathname.startsWith(path) && pathname !== '/'
 
   return (
-    <div className="p-4 w-64 border-r border-gray-200">
+    <div className="w-64 border-r border-gray-200 p-4">
       <nav>
         <ul className="flex flex-col gap-2">
           <li className={isHome ? 'text-blue-500' : ''}>

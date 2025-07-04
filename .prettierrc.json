@@ -8,5 +8,7 @@
   "jsxSingleQuote": false,
   "bracketSameLine": false,
   "bracketSpacing": true,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindPreserveWhitespace": true
 }

@@ -88,10 +88,10 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
           <input
             id="title"
             type="text"
-            className="w-full p-2 border border-gray-300 rounded-md mt-2"
+            className="mt-2 w-full rounded-md border border-gray-300 p-2"
             {...register('title', { required: '제목을 입력해주세요' })}
           />
-          {errors.title && <p className="text-red-500 mt-1 text-sm">{errors.title.message}</p>}
+          {errors.title && <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>}
         </div>
 
         <div className="mb-4">
@@ -100,23 +100,23 @@ export default function PostForm({ title, content, onSubmit }: PostFormProps) {
             id="content"
             {...register('content', { required: '내용을 입력해주세요' })}
             rows={6}
-            className="w-full p-2 border border-gray-300 rounded-md mt-2"
+            className="mt-2 w-full rounded-md border border-gray-300 p-2"
           />
-          {errors.content && <p className="text-red-500 mt-1 text-sm">{errors.content.message}</p>}
+          {errors.content && <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>}
         </div>
         <div className="flex justify-between">
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto ${
-              isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+            className={`pointer-events-auto cursor-pointer rounded-md border border-gray-300 p-2 ${
+              isSubmitting ? 'cursor-not-allowed opacity-50' : ''
             }`}
           >
             {isSubmitting ? '등록 중...' : '글 등록하기'}
           </button>
 
           <DirtyAwareLink
-            className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
+            className="pointer-events-auto cursor-pointer rounded-md border border-gray-300 p-2"
             href={PATH.SERVICE_BOARD}
           >
             목록

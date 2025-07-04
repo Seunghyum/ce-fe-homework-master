@@ -54,13 +54,13 @@ const ModalStack = ({ modals, closeModal }: { modals: ModalContent[]; closeModal
 
   return ReactDOM.createPortal(
     <>
-      {modals.length > 0 && <div onClick={closeModal} className="fixed inset-0 bg-black/50 z-[1000]" />}
+      {modals.length > 0 && <div onClick={closeModal} className="fixed inset-0 z-[1000] bg-black/50" />}
       {modals.map((Modal, idx) => (
         <div
           key={idx}
-          className="fixed inset-0 z-[1010] flex justify-center items-center overflow-auto pointer-events-none"
+          className="pointer-events-none fixed inset-0 z-[1010] flex items-center justify-center overflow-auto"
         >
-          <div className="bg-white p-4 rounded-md max-h-[90vh] overflow-y-auto shadow-md">{Modal}</div>
+          <div className="max-h-[90vh] overflow-y-auto rounded-md bg-white p-4 shadow-md">{Modal}</div>
         </div>
       ))}
     </>,

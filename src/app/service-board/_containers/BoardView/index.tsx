@@ -63,7 +63,7 @@ export default function BoardView() {
     <>
       <ToolBar />
       {!isFetching && data.length === 0 && (
-        <div className="flex justify-center items-center h-full">등록된 게시글이 없습니다. 새글을 등록해보세요.</div>
+        <div className="flex h-full items-center justify-center">등록된 게시글이 없습니다. 새글을 등록해보세요.</div>
       )}
       {isMounted && viewType === VIEW_TYPE.LIST && !isFetching && (
         <BoardTable data={data} onEdit={handleEdit} onDelete={handleDelete} onDetail={handleClickItem} />

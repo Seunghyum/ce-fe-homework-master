@@ -30,9 +30,9 @@ export const ListPagination: React.FC<ListPaginationProps> = ({ totalPages, curr
   const pageNumbers = getPageNumbers()
 
   return (
-    <div className="mt-4 float-right">
+    <div className="float-right mt-4">
       <button
-        className="px-2 py-1 border border-gray-300"
+        className="border border-gray-300 px-2 py-1"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -40,14 +40,14 @@ export const ListPagination: React.FC<ListPaginationProps> = ({ totalPages, curr
       </button>
       {pageNumbers.map((page, idx) =>
         page === '...' ? (
-          <span className="px-2 py-1 border border-gray-300" key={idx}>
+          <span className="border border-gray-300 px-2 py-1" key={idx}>
             ...
           </span>
         ) : (
           <button
             key={idx}
             onClick={() => onPageChange(page as number)}
-            className={`px-2 py-1 border border-gray-300 ${page === currentPage ? 'font-bold' : 'font-normal'} ${
+            className={`border border-gray-300 px-2 py-1 ${page === currentPage ? 'font-bold' : 'font-normal'} ${
               page === currentPage ? 'underline' : 'none'
             }`}
           >
@@ -56,7 +56,7 @@ export const ListPagination: React.FC<ListPaginationProps> = ({ totalPages, curr
         ),
       )}
       <button
-        className="px-2 py-1 border border-gray-300"
+        className="border border-gray-300 px-2 py-1"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >

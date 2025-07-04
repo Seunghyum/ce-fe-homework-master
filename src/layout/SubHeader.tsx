@@ -7,7 +7,7 @@ interface SubHeaderProps {
 export default function SubHeader({ title, children }: PropsWithChildren<SubHeaderProps>) {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">{title}</h1>
+      <h1 className="mb-4 text-2xl font-bold">{title}</h1>
       {children}
     </div>
   )

@@ -22,21 +22,21 @@ export default function ToolBar() {
   }
 
   return (
-    <div className="mb-4 flex justify-between items-center">
+    <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-2">
         <input
           ref={searchRef}
           onKeyDown={handleEnterSearch}
-          className="border border-gray-300 rounded-md p-2"
+          className="rounded-md border border-gray-300 p-2"
           type="text"
         />
-        <button onClick={handleClickSearch} className="border border-gray-300 rounded-md p-2">
+        <button onClick={handleClickSearch} className="rounded-md border border-gray-300 p-2">
           검색
         </button>
       </div>
       <div className="flex items-center gap-2">
         <Link href={PATH.SERVICE_BOARD_CREATE}>
-          <button className="border border-gray-300 rounded-md p-2 cursor-pointer">등록</button>
+          <button className="cursor-pointer rounded-md border border-gray-300 p-2">등록</button>
         </Link>
       </div>
     </div>

@@ -34,11 +34,11 @@ export const DropdownButton: React.FC<PropsWithChildren<DropdownButtonProps>> = 
 
   return (
     <div className="relative inline-block" ref={menuRef}>
-      <button onClick={handleClick} className="border-none bg-none cursor-pointer text-2xl">
+      <button onClick={handleClick} className="cursor-pointer border-none bg-none text-2xl">
         {children}
       </button>
       {open && (
-        <div className="absolute top-[30px] right-0 border border-gray-300 bg-white rounded-md shadow-md z-1000 p-2 min-w-40">
+        <div className="absolute top-[30px] right-0 z-1000 min-w-40 rounded-md border border-gray-300 bg-white p-2 shadow-md">
           {data.map(({ title, onClick }, index) => (
             <button
               key={index}
@@ -46,7 +46,7 @@ export const DropdownButton: React.FC<PropsWithChildren<DropdownButtonProps>> = 
                 if (preventClickBubbling) e.stopPropagation()
                 onClick()
               }}
-              className="w-full p-2 text-left cursor-pointer"
+              className="w-full cursor-pointer p-2 text-left"
             >
               {title}
             </button>

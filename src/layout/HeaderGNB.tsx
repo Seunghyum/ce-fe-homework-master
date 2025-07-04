@@ -13,7 +13,7 @@ export default function HeaderGNB() {
   }
 
   return (
-    <header className="h-16 border-b-2 border-gray-200 p-4 flex justify-between items-center">
+    <header className="flex h-16 items-center justify-between border-b-2 border-gray-200 p-4">
       <h1 className="text-2xl">Dashboard</h1>
       <DropdownButton
         data={[

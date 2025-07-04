@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKR.className} antialiased flex flex-col h-screen`}>
+      <body className={`${notoSansKR.className} flex h-screen flex-col antialiased`}>
         <ReactQueryProviders>
           <ModalProvider>
             <HeaderGNB />

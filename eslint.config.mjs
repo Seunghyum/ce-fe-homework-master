@@ -21,7 +21,6 @@ const eslintConfig = [
       'plugin:react-hooks/recommended',
       'plugin:jsx-a11y/recommended',
       'plugin:import/recommended',
-      'plugin:react-hooks/recommended',
     ],
     rules: {
       'react/react-in-jsx-scope': 'off',

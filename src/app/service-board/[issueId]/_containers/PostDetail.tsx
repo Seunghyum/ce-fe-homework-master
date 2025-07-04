@@ -32,9 +32,9 @@ export default function PostDetail({ issueId }: { issueId: string }) {
   }
 
   return (
-    <div className="border-2 border-gray-200 rounded-md p-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold mb-2">{data?.title}</h1>
+    <div className="rounded-md border-2 border-gray-200 p-4">
+      <div className="flex items-center justify-between">
+        <h1 className="mb-2 text-2xl font-bold">{data?.title}</h1>
         <DropdownButton
           data={[
             { title: '수정', onClick: handleEdit },
@@ -52,11 +52,11 @@ export default function PostDetail({ issueId }: { issueId: string }) {
       </p>
       <hr className="my-4" />
 
-      <p className="whitespace-pre-wrap  min-h-[50vh]">{data?.body}</p>
+      <p className="min-h-[50vh]  whitespace-pre-wrap">{data?.body}</p>
       <hr className="my-4" />
       <div className="flex justify-end">
         <Link href={PATH.SERVICE_BOARD}>
-          <button className="border border-gray-300 rounded-md p-2 cursor-pointer">목록</button>
+          <button className="cursor-pointer rounded-md border border-gray-300 p-2">목록</button>
         </Link>
       </div>
     </div>

@@ -16,18 +16,18 @@ export default function AlertModal({
   const { closeModal } = useModal()
 
   return (
-    <div className="flex flex-col gap-2 min-w-[300px]">
+    <div className="flex min-w-[300px] flex-col gap-2">
       <h2 className="text-lg font-bold">{title}</h2>
       <p className="text-sm">{message}</p>
       <div className="flex justify-end gap-2">
         <button
-          className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
+          className="pointer-events-auto cursor-pointer rounded-md border border-gray-300 p-2"
           onClick={closeModal}
         >
           {cancelText}
         </button>
         <button
-          className="border border-gray-300 rounded-md p-2 cursor-pointer pointer-events-auto"
+          className="pointer-events-auto cursor-pointer rounded-md border border-gray-300 p-2"
           onClick={() => {
             onConfirm()
             closeModal()

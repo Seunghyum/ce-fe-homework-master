@@ -25,7 +25,7 @@ export default function BoardTable({ data, onEdit, onDelete, onDetail }: BoardTa
         <tbody className="border-r border-gray-200">
           {data.map((issue) => (
             <tr
-              className="border-b border-l border-gray-200 cursor-pointer"
+              className="cursor-pointer border-b border-l border-gray-200"
               onClick={() => onDetail(issue.number)}
               key={issue.id}
             >
