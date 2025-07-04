@@ -4,6 +4,8 @@ import BoardView from '@/app/service-board/_containers/BoardView'
 import SubHeader from '@/layout/SubHeader'
 import { fetchRepoIssues, repoIssuesKey } from '@/query/repoIssues'
 
+import ToolBar from './_containers/ToolBar'
+
 export default async function ServiceBoardPage() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
@@ -13,6 +15,7 @@ export default async function ServiceBoardPage() {
 
   return (
     <SubHeader title="서비스 게시판">
+      <ToolBar />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <BoardView />
       </HydrationBoundary>

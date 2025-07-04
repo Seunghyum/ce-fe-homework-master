@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import AlertModal from '@/app/components/AlertModal'
 import { ListPagination } from '@/app/components/ListPagination'
 import { useModal } from '@/app/components/ModalContext'
-import ToolBar from '@/app/service-board/_containers/ToolBar'
 import { usePaginationStore } from '@/app/service-board/_stores/usePaginationStore'
 import { useSearchTextStore } from '@/app/service-board/_stores/useSearchText'
 import { PATH } from '@/constants/path'
@@ -61,7 +60,6 @@ export default function BoardView() {
 
   return (
     <>
-      <ToolBar />
       {!isFetching && data.length === 0 && (
         <div className="flex h-full items-center justify-center">등록된 게시글이 없습니다. 새글을 등록해보세요.</div>
       )}
