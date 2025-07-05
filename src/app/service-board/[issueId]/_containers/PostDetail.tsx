@@ -8,7 +8,7 @@ import { DropdownButton } from '@/app/_components/DropdownButton'
 import { useModal } from '@/app/_components/ModalContext'
 import { PATH } from '@/constants/path'
 import QueryErrorSuspenseBoundary from '@/hoc/QueryErrorSuspenseBoundary'
-import { useDeleteRepoIssueMutation, useRepoIssueByIdQuery } from '@/query/repoIssues'
+import { repoIssues } from '@/query/repoIssues/'
 import { parsePath } from '@/utils/path'
 
 export default function PostDetailWrapper({ issueId }: { issueId: string }) {
@@ -27,8 +27,8 @@ export default function PostDetailWrapper({ issueId }: { issueId: string }) {
 
 export function PostDetail({ issueId }: { issueId: string }) {
   const router = useRouter()
-  const { mutate: deleteIssue } = useDeleteRepoIssueMutation()
-  const { data } = useRepoIssueByIdQuery(issueId)
+  const { mutate: deleteIssue } = repoIssues.mutation.useDeleteRepoIssueMutation()
+  const { data } = repoIssues.query.useRepoIssueByIdQuery(issueId)
   const { openModal } = useModal()
   const handleEdit = () => {
     router.push(parsePath(PATH.SERVICE_BOARD_EDIT, { issueId }))

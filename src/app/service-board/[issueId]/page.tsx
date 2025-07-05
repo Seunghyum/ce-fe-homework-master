@@ -1,6 +1,6 @@
 import { PrefetchBoundary } from '@/hoc/PrefetchBoundary'
 import SubHeader from '@/layout/SubHeader'
-import { fetchRepoIssueById, repoIssuesKey } from '@/query/repoIssues'
+import { repoIssues } from '@/query/repoIssues/'
 
 import PostDetailWrapper from './_containers/PostDetail'
 
@@ -11,8 +11,8 @@ export default async function IssueDetailPage({ params }: { params: Promise<{ is
     <SubHeader title="서비스 게시판">
       <PrefetchBoundary
         prefetchOptions={{
-          queryKey: repoIssuesKey.detail(issueId),
-          queryFn: () => fetchRepoIssueById(issueId),
+          queryKey: repoIssues.key.detail(issueId),
+          queryFn: () => repoIssues.api.fetchRepoIssueById(issueId),
         }}
       >
         <PostDetailWrapper issueId={issueId} />

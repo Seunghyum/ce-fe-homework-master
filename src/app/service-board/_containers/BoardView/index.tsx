@@ -9,7 +9,7 @@ import { useViewTypeStore } from '@/app/service-board/_stores/useViewTypeStore'
 import { PATH } from '@/constants/path'
 import { VIEW_TYPE } from '@/constants/viewType'
 import { useIsMounted } from '@/hooks/useIsMounted'
-import { useDeleteRepoIssueMutation } from '@/query/repoIssues'
+import { repoIssues } from '@/query/repoIssues/'
 import { parsePath } from '@/utils/path'
 
 import BoardCardList from './BoardCardList'
@@ -18,7 +18,7 @@ import BoardTable from './BoardTable'
 export default function BoardView() {
   const router = useRouter()
   const { openModal, closeModal } = useModal()
-  const { mutate: deleteIssue } = useDeleteRepoIssueMutation()
+  const { mutate: deleteIssue } = repoIssues.mutation.useDeleteRepoIssueMutation()
   const viewType = useViewTypeStore((state) => state.viewType)
   const isMounted = useIsMounted()
 

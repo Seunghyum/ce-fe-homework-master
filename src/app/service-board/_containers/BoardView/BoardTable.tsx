@@ -1,9 +1,10 @@
 'use client'
 
 import { DropdownButton } from '@/app/_components/DropdownButton'
-import { Issue } from '@/query/repoIssues'
+import { Issue } from '@/query/repoIssues/types'
+
 interface BoardTableProps {
-  data: Issue[] // 게시글 목록
+  data: Issue[]
   onEdit: (id: number) => void
   onDelete: (id: number) => void
   onDetail: (id: number) => void

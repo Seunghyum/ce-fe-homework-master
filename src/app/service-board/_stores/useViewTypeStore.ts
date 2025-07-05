@@ -15,7 +15,7 @@ export const useViewTypeStore = create<useViewTypeState>()(
       setViewType: (viewType: ViewType) => set({ viewType }),
     }),
     {
-      name: 'view-type-storage', // localStorage key
+      name: 'view-type-storage',
     },
   ),
 )

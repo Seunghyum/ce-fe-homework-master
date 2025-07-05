@@ -3,15 +3,15 @@
 import { useRouter, useParams } from 'next/navigation'
 
 import { PATH } from '@/constants/path'
-import { useRepoIssueByIdQuery, useUpdateRepoIssueMutation } from '@/query/repoIssues'
+import { repoIssues } from '@/query/repoIssues/'
 
 import PostForm, { FormValues } from '../../_containers/PostForm'
 
 export default function IssueEditPage() {
   const router = useRouter()
   const { issueId } = useParams<{ issueId: string }>()
-  const { data } = useRepoIssueByIdQuery(issueId)
-  const { mutateAsync } = useUpdateRepoIssueMutation(issueId)
+  const { data } = repoIssues.query.useRepoIssueByIdQuery(issueId)
+  const { mutateAsync } = repoIssues.mutation.useUpdateRepoIssueMutation(issueId)
   const onSubmit = async (data: FormValues) => {
     await mutateAsync(data)
     router.push(PATH.SERVICE_BOARD)
