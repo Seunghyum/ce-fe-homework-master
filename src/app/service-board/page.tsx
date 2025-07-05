@@ -20,7 +20,7 @@ export default function ServiceBoardWrapper() {
   )
 }
 
-export async function ServiceBoard() {
+async function ServiceBoard() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: repoIssuesKey.list(1),
