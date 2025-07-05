@@ -1,7 +1,7 @@
 'use client'
 
-// eslint-disable-next-line import/order
 import { createContext, useContext, useState, ReactNode } from 'react'
+import ReactDOM from 'react-dom'
 
 type ModalContent = ReactNode
 
@@ -46,8 +46,6 @@ export const useModal = () => {
   if (!context) throw new Error('useModal 은 ModalProvider 안에서만 사용할 수 있습니다.')
   return context
 }
-
-import ReactDOM from 'react-dom'
 
 const ModalStack = ({ modals, closeModal }: { modals: ModalContent[]; closeModal: () => void }) => {
   if (typeof window === 'undefined') return null
