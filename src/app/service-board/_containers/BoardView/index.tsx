@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 
-import AlertModal from '@/app/components/AlertModal'
-import { useModal } from '@/app/components/ModalContext'
+import AlertModal from '@/app/_components/AlertModal'
+import { useModal } from '@/app/_components/ModalContext'
 import useRepoIssues from '@/app/service-board/_hooks/useRepoIssues'
 import { useViewTypeStore } from '@/app/service-board/_stores/useViewTypeStore'
 import { PATH } from '@/constants/path'

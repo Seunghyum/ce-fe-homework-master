@@ -7,7 +7,7 @@ import MainWrapper from '@/layout/MainWrapper'
 import SidebarLNB from '@/layout/SidebarLNB'
 import ReactQueryProviders from '@/providers/ReactQueryProvider'
 
-import { ModalProvider } from './components/ModalContext'
+import { ModalProvider } from './_components/ModalContext'
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ['latin'],

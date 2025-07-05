@@ -1,5 +1,5 @@
-import { DropdownButton } from '@/app/components/DropdownButton'
-import PostCard from '@/app/components/PostCard'
+import { DropdownButton } from '@/app/_components/DropdownButton'
+import PostCard from '@/app/_components/PostCard'
 import { Issue } from '@/query/repoIssues'
 
 interface BoardCardListProps {

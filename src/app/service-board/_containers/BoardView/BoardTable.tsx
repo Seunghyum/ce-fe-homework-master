@@ -1,6 +1,6 @@
 'use client'
 
-import { DropdownButton } from '@/app/components/DropdownButton'
+import { DropdownButton } from '@/app/_components/DropdownButton'
 import { Issue } from '@/query/repoIssues'
 interface BoardTableProps {
   data: Issue[] // 게시글 목록

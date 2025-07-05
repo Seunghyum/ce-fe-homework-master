@@ -3,9 +3,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import AlertModal from '@/app/components/AlertModal'
-import { DropdownButton } from '@/app/components/DropdownButton'
-import { useModal } from '@/app/components/ModalContext'
+import AlertModal from '@/app/_components/AlertModal'
+import { DropdownButton } from '@/app/_components/DropdownButton'
+import { useModal } from '@/app/_components/ModalContext'
 import { PATH } from '@/constants/path'
 import QueryErrorSuspenseBoundary from '@/hoc/QueryErrorSuspenseBoundary'
 import { useDeleteRepoIssueMutation, useRepoIssueByIdQuery } from '@/query/repoIssues'

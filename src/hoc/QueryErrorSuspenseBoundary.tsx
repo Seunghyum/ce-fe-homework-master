@@ -5,7 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 
-import Loading from '@/app/components/Loading'
+import Loading from '@/app/_components/Loading'
 
 interface PropsType {
   children: React.ReactNode

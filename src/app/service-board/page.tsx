@@ -10,7 +10,7 @@ import QueryErrorSuspenseBoundary from '@/hoc/QueryErrorSuspenseBoundary'
 import SubHeader from '@/layout/SubHeader'
 import { fetchRepoIssues, repoIssuesKey } from '@/query/repoIssues'
 
-import Loading from '../components/Loading'
+import Loading from '../_components/Loading'
 
 export default function ServiceBoardWrapper() {
   return (

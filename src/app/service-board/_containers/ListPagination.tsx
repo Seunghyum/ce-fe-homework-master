@@ -1,6 +1,6 @@
 'use client'
 
-import { Pagination } from '@/app/components/Pagination'
+import { Pagination } from '@/app/_components/Pagination'
 import { usePaginationStore } from '@/app/service-board/_stores/usePaginationStore'
 
 import useRepoIssues from '../_hooks/useRepoIssues'

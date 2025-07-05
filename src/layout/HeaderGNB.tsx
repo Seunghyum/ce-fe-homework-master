@@ -1,6 +1,6 @@
 'use client'
 
-import { DropdownButton } from '@/app/components/DropdownButton'
+import { DropdownButton } from '@/app/_components/DropdownButton'
 import { useViewTypeStore } from '@/app/service-board/_stores/useViewTypeStore'
 import { VIEW_TYPE, ViewType } from '@/constants/viewType'
 

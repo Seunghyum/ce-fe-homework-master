@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 
-import { DirtyAwareLink } from '@/app/components/DirtyAwareLink'
+import { DirtyAwareLink } from '@/app/_components/DirtyAwareLink'
 import { PATH } from '@/constants/path'
 
 export default function SidebarLNB() {
