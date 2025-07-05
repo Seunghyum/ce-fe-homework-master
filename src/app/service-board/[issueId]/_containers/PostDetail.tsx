@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import AlertModal from '@/app/_components/AlertModal'
 import { DropdownButton } from '@/app/_components/DropdownButton'
-import { useModal } from '@/app/_components/ModalContext'
+import { useModal } from '@/app/_context/ModalContext'
 import { PATH } from '@/constants/path'
 import QueryErrorSuspenseBoundary from '@/hoc/QueryErrorSuspenseBoundary'
 import { repoIssues } from '@/query/repoIssues/'

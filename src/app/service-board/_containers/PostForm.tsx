@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import { DirtyAwareLink } from '@/app/_components/DirtyAwareLink'
 import { useDirtyStore } from '@/app/_components/DirtyAwareLink/useDirtyStore'
-import { useModal } from '@/app/_components/ModalContext'
+import { useModal } from '@/app/_context/ModalContext'
 import { PATH } from '@/constants/path'
 
 export type FormValues = {

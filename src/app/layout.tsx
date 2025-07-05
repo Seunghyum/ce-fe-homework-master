@@ -2,12 +2,11 @@ import type { Metadata } from 'next'
 import { Noto_Sans_KR } from 'next/font/google'
 
 import './globals.css'
+import { ModalProvider } from '@/app/_context/ModalContext'
 import HeaderGNB from '@/layout/HeaderGNB'
 import MainWrapper from '@/layout/MainWrapper'
 import SidebarLNB from '@/layout/SidebarLNB'
 import ReactQueryProviders from '@/providers/ReactQueryProvider'
-
-import { ModalProvider } from './_components/ModalContext'
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ['latin'],

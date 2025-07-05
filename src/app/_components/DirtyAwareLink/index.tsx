@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 
 import AlertModal from '@/app/_components/AlertModal'
-import { useModal } from '@/app/_components/ModalContext'
+import { useModal } from '@/app/_context/ModalContext'
 
 import { useDirtyStore } from './useDirtyStore'
 

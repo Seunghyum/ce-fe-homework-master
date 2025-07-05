@@ -1,4 +1,4 @@
-import { useModal } from './ModalContext'
+import { useModal } from '@/app/_context/ModalContext'
 
 export default function AlertModal({
   title,
