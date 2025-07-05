@@ -53,6 +53,7 @@ SubHeader 컴포넌트로 서비스 게시판의  "서비스 게시판", "게시
 ### 2. 공통 컴포넌트
 
 - **모달**: ModalContext.ts 의 useModal로 openModal 매서드로 컴포넌트를 인자로 받아 실행. AlertModal UI 컴포넌트로 확인창 공통 모달을 사용.
+
 ```js
 const { openModal } = useModal()
 openModal(
@@ -140,7 +141,7 @@ docker run -p 3000:3000 nextjs-app
 
 - 서비스게시판에서 검색 or 페이지 이동 후 홈 화면으로 갔다가 돌아온 경우 조작한 것을 그대로 유지해서 사용자 경험을 높이려고 했습니다. 구현 하진 않았지만 더 개선할 수 있는 방향은 url query params로 페이징, 검색을 같이 관리하면 브라우저 history로 관리할 수 있어 더 좋을 것 같습니다.
 - ErrorBoundary와 React query 에러, suspense를 통합해서 관리할 수 있는 QueryErrorSuspenseBoundary 를 만들었습니다.
-
+- query, api, mutation, type 을 파일로 분리하여 관리(/homework/src/query/repoIssues/index.ts)하고 `repoIssues.api.fetchRepoIssues`, `repoIssues.query.useRepoIssueByIdQuery` 처럼 도메인으로 검색할 수 있게 함.
 ---
 
 ## 🤖 AI 활용 내역
@@ -159,3 +160,4 @@ docker run -p 3000:3000 nextjs-app
 - [react-hook-form 문서](https://react-hook-form.com/docs)
 - [@tanstack/react-query 문서](https://tanstack.com/query/latest)
 - [Next.js 문서](https://nextjs.org/docs)
+- [zustand 문서](https://zustand.docs.pmnd.rs/getting-started/introduction)
